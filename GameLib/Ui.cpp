@@ -12,24 +12,28 @@
 
 // Without NOMINMAX, windows.h defines a max() macro
 // which conflicts with std::numeric_limits<std::streamsize>::max().
-#define NOMINMAX
 #ifdef _WIN32
+	#define NOMINMAX
 	#include <windows.h>
 #else
 	#include <term.h>
 	#include <unistd.h>
 #endif
 
+static std::string const first_delimiter_y_open = "  ";
+
 static std::string const delimiter_x_open = "   ";
 static std::string const delimiter_x_closed = " | ";
-static std::string const delimiter_x_barrier_check = "S";
-static std::string const delimiter_y_open = "   ";
+static std::string const delimiter_y_open = "    ";
 #ifdef _WIN32
+	static std::string const first_delimiter_y_closed = "--";
+	static std::string const last_delimiter_y_closed = " --";
 	static std::string const delimiter_y_closed = " ---";
 #else
+	static std::string const first_delimiter_y_closed = "\u2015\u2015";
+	static std::string const last_delimiter_y_closed = " \u2015\u2015";
 	static std::string const delimiter_y_closed = " \u2015\u2015\u2015";
 #endif
-static std::string const delimiter_y_barrier_check = "~";
 
 void Ui::drawGame(std::shared_ptr<const GameField> gameField) const {
 	std::string result;
@@ -44,6 +48,40 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const {
 		result.append("\n");
 	}
 	std::cout << result << std::endl;
+}
+
+void Ui::appendDelimiter(std::string & result, std::shared_ptr<const GameField> gameField, Coordinate const & coordinate) const
+{
+	if (coordinate.y() != 0) {
+		if (gameField->isOpenBelowCoordinate(coordinate)) {
+			result.append(coordinate.x() == 0 ? first_delimiter_y_open : delimiter_y_open);
+		} else {
+			if(coordinate.x() == 0)
+			{
+				result.append(first_delimiter_y_closed);
+			}
+			else if(gameField->getWidth()-1)
+			{
+				result.append(last_delimiter_y_closed);
+			}
+			else
+			{
+				result.append(delimiter_y_closed);
+			}
+		}
+	}
+}
+
+void Ui::appendContent(std::string & result, std::shared_ptr<const GameField> gameField, Coordinate const & coordinate) const
+{
+	if (coordinate.x() != 0) {
+		if (gameField->isOpenLeftOfCoordinate(coordinate)) {
+			result.append(delimiter_x_open);
+		} else {
+			result.append(delimiter_x_closed);
+		}
+	}
+	result.append(gameField->getPosition(coordinate).toString());
 }
 
 void Ui::showWinnerMessage(std::shared_ptr<const Player> player) const {
@@ -72,29 +110,6 @@ int Ui::showMultipleChoice(const std::string &message, const std::vector<std::st
 	}
 
 	return result;
-}
-
-void Ui::appendDelimiter(std::string & result, std::shared_ptr<const GameField> gameField, Coordinate const & coordinate) const
-{
-	if (coordinate.y() != 0) {
-		if (gameField->isOpenBelowCoordinate(coordinate)) {
-			result.append(delimiter_y_open);
-		} else {
-			result.append(delimiter_y_closed);
-		}
-	}
-}
-
-void Ui::appendContent(std::string & result, std::shared_ptr<const GameField> gameField, Coordinate const & coordinate) const
-{
-	if (coordinate.x() != 0) {
-		if (gameField->isOpenLeftOfCoordinate(coordinate)) {
-			result.append(delimiter_x_open);
-		} else {
-			result.append(delimiter_x_closed);
-		}
-	}
-	result.append(gameField->getPosition(coordinate).toString());
 }
 
 void Ui::clearScreen() const {
