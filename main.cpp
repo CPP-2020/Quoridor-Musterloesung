@@ -63,7 +63,7 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
 
     if (choice == 1)
     {
-      return std::make_shared<Player>("Player " + std::to_string(playerId), playerId);
+      //return std::make_shared<Player>("Player " + std::to_string(playerId), playerId);
     }
 
     if (choice == 2)
