@@ -5,12 +5,10 @@
 #ifndef HACKATHON_UI_H
 #define HACKATHON_UI_H
 
+#include "GameField.h"
 #include <memory>
+#include <string>
 #include <vector>
-
-class Player;
-class GameField;
-class Coordinate;
 
 class Ui {
 public:

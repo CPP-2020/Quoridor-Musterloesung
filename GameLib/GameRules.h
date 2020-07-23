@@ -5,8 +5,6 @@
 #ifndef HACKATHON_GAMERULES_H
 #define HACKATHON_GAMERULES_H
 
-
-#include "PlayerId.h"
 #include <memory>
 
 class Player;

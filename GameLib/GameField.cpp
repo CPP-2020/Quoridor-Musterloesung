@@ -81,13 +81,13 @@ bool GameField::borderBetweenCoordinates(Coordinate const & a, Coordinate const 
     return getEdgeIdBetweenCoordinates(a, b) != Graph::INVALID_EDGE_ID;
 }
 
-std::shared_ptr< Position const> GameField::getPlayerPosition(const std::shared_ptr<const PlayerId> &playerId) const {
-    assert(m_playerPositions.find(playerId) != m_playerPositions.end());
+std::shared_ptr< Position const> GameField::getPlayerPosition(const std::shared_ptr<const Player> &player) const {
+    assert(m_playerPositions.find(player) != m_playerPositions.end());
 
-    return m_playerPositions.at(playerId);
+    return m_playerPositions.at(player);
 }
 
-void GameField::setPlayerPosition(std::shared_ptr<const PlayerId> &playerId,
+void GameField::setPlayerPosition(std::shared_ptr<const Player> &player,
                                   std::shared_ptr<Position const> position) {
-  m_playerPositions[playerId] = position;
+  m_playerPositions[player] = position;
 }
