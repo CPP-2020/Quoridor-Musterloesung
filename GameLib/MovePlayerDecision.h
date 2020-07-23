@@ -19,7 +19,7 @@ public:
 	MovePlayerDecision(std::shared_ptr<const Player> player, Direction direction);
 
 	bool isValidMove(std::shared_ptr<const GameField> gameField) const override;
-	void executeMove(std::shared_ptr<const GameField> gameField) override;
+	void executeMove(std::shared_ptr<GameField> gameField) override;
 
 private:
 	Direction direction;

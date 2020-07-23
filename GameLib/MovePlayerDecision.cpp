@@ -19,7 +19,7 @@ bool MovePlayerDecision::isValidMove(std::shared_ptr<const GameField> gameField)
 		   !isOtherPlayerInTheWay(gameField);
 }
 
-void MovePlayerDecision::executeMove(std::shared_ptr<const GameField> gameField)
+void MovePlayerDecision::executeMove(std::shared_ptr<GameField> gameField)
 {
 
 }
@@ -42,7 +42,7 @@ bool MovePlayerDecision::isBorderInTheWay(std::shared_ptr<const GameField> gameF
 			nextPlayerCoordinate = std::make_shared<const Coordinate>(currentPlayerCoordinate->getRightCoordinate());
 			break;
 	}
-	return gameField->borderBetweenCoordinates(*currentPlayerCoordinate, *nextPlayerCoordinate);
+	return !gameField->noBorderBetweenCoordinates(*currentPlayerCoordinate, *nextPlayerCoordinate);
 }
 
 bool MovePlayerDecision::isOutOfGameField(std::shared_ptr<const GameField> gameField) const
