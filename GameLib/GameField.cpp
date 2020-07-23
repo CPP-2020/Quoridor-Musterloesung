@@ -105,13 +105,13 @@ std::shared_ptr<Coordinate const> GameField::getPlayerPosition(
 
     return m_playerPositions.at(player);
 }
-void GameField::setPlayerPosition(std::shared_ptr<const Player> &player,
+void GameField::setPlayerPosition(std::shared_ptr<const Player> player,
                                   std::shared_ptr<const Coordinate> position)
 {
     m_playerPositions[player] = position;
 }
 
-bool GameField::isValidCoordinate(const Coordinate coordinate) const
+bool GameField::isValidCoordinate(const Coordinate &coordinate) const
 {
     bool xValid = coordinate.x() >= 0 && coordinate.x() < s_width;
     bool yValid = coordinate.y() >= 0 && coordinate.y() < s_height;

@@ -3,21 +3,18 @@
 //
 
 
-
-#ifndef HACKATHON_GAMEHOST_H
-#define HACKATHON_GAMEHOST_H
+#ifndef HACKATHON_RANDOMBOT_H
+#define HACKATHON_RANDOMBOT_H
 
 #include "Player.h"
-
 
 
 class RandomBot : public Player, std::enable_shared_from_this<RandomBot>
 {
   public:
+    RandomBot(const std::string &name, const int &id, const BoardSides &startSide);
+
     std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) override;
-
-
-
 };
 
-#endif // HACKATHON_GAMEHOST_H
+#endif // HACKATHON_RANDOMBOT_H

@@ -1,9 +1,9 @@
-#include "GameLib/Ui.h"
-#include "GameLib/GameHost.h"
-#include "GameLib/Player.h"
-#include "GameLib/HumanPlayer.h"
 #include "GameLib/GameField.h"
-
+#include "GameLib/GameHost.h"
+#include "GameLib/HumanPlayer.h"
+#include "GameLib/Player.h"
+#include "GameLib/RandomBot.h"
+#include "GameLib/Ui.h"
 
 #include <memory>
 
@@ -59,7 +59,7 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
         message = "What should be the second player?";
     }
 
-    int choice = ui->showMultipleChoice(message, {"Human player"});
+    int choice = ui->showMultipleChoice(message, {"Human player", "Random player"});
 
     if (choice == 1)
     {
@@ -68,6 +68,7 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
 
     if (choice == 2)
     {
+        return std::make_shared<RandomBot>("Player " + std::to_string(playerId), playerId, BoardSides::Right);
     }
 
     if (choice == 3)
