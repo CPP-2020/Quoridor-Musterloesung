@@ -12,13 +12,13 @@
 
 class GameHost {
 public:
-    GameHost(Ui& ui, std::vector<Player> players);
+    GameHost(std::shared_ptr<Ui>& ui, std::vector<std::shared_ptr<Player>>& players);
 
     void startGame();
 
 private:
     std::shared_ptr<Ui> ui;
-    std::vector<Player> players;
+    std::vector<std::shared_ptr<Player>>& players;
     std::shared_ptr<GameRules> gameRules;
     std::shared_ptr<GameField> gameField;
 };
