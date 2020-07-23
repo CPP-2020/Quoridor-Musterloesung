@@ -24,6 +24,8 @@ private:
     std::vector<std::shared_ptr<Player>>& players;
     std::shared_ptr<GameRules> gameRules;
     std::shared_ptr<GameField> gameField;
+
+    void placePlayersOnField() const;
 };
 
 

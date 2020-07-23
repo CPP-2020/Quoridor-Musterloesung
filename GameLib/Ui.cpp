@@ -142,3 +142,7 @@ void Ui::appendContent(std::string & result, std::shared_ptr<const GameField> ga
 	result.append(gameField->getPosition(coordinate).toString());
 }
 
+void Ui::showMessage(const std::string &message) const
+{
+    std::cout << message << std::endl;
+}

@@ -103,7 +103,7 @@ std::shared_ptr<Coordinate const> GameField::getPlayerPosition(
 
     return m_playerPositions.at(player);
 }
-void GameField::setPlayerPosition(std::shared_ptr<const Player> &player,
+void GameField::setPlayerPosition(std::shared_ptr<const Player> player,
                                   std::shared_ptr<const Coordinate> position)
 {
     m_playerPositions[player] = position;

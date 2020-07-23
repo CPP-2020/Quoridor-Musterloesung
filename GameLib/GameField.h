@@ -32,7 +32,7 @@ public:
     bool isValidCoordinate(const Coordinate coordinate) const;
 
     std::shared_ptr<Coordinate const> getPlayerPosition(std::shared_ptr<Player const> const &player) const;
-    void setPlayerPosition(std::shared_ptr<Player const> &player, std::shared_ptr<Coordinate const> position);
+    void setPlayerPosition(std::shared_ptr<Player const> player, std::shared_ptr<Coordinate const> position);
 
 	bool noBorderBetweenCoordinates(Coordinate const & a, Coordinate const & b) const;
     void setBorderBetweenCoordinates(Coordinate const & a, Coordinate const & b);
