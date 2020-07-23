@@ -18,10 +18,12 @@ public:
 
     const Position & getPosition(Coordinate const & coordinates) const;
 
-    const Position &getPlayerPosition(std::shared_ptr<PlayerId const> const &playerId) const;
+    std::shared_ptr<Position const> getPlayerPosition(std::shared_ptr<PlayerId const> const &playerId) const;
+
+    void setPlayerPosition(std::shared_ptr<PlayerId const> &playerId, std::shared_ptr<Position const> position);
 
 private:
-    std::map<std::shared_ptr<PlayerId const>, Position const &> m_playerPositions;
+    std::map<std::shared_ptr<PlayerId const>, std::shared_ptr<Position const>> m_playerPositions;
 
     Position & getPosition(Coordinate const & coordinates);
     // Returns corresponding EdgeId and Graph::INVALID_EDGE_ID if edge is already removed
