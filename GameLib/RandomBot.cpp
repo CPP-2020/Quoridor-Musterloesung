@@ -53,3 +53,7 @@ std::shared_ptr<GameDecision> RandomBot::getGameDecision(std::shared_ptr<GameFie
     }
 
 }
+RandomBot::RandomBot(const std::string &name, const int &id, const BoardSides &startSide)
+        : Player(name, id, startSide)
+{
+}

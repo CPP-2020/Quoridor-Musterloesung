@@ -111,7 +111,7 @@ void GameField::setPlayerPosition(std::shared_ptr<const Player> player,
     m_playerPositions[player] = position;
 }
 
-bool GameField::isValidCoordinate(const Coordinate coordinate) const
+bool GameField::isValidCoordinate(const Coordinate &coordinate) const
 {
     bool xValid = coordinate.x() >= 0 && coordinate.x() < s_width;
     bool yValid = coordinate.y() >= 0 && coordinate.y() < s_height;
