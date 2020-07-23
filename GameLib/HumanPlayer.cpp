@@ -96,28 +96,19 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
         borderOrientation = BorderOrientation::Horizontal;
     }
 
-    int borderPlacement =
-        ui->showMultipleChoice("Where would you like to place the border?", {"a", "b", "c"});
+    int XborderPlacement = ui->showMultipleChoice(
+        "Where would you like to place the border (x value)?", {"1", "2", "3", "4", "5", "6", "7"});
+
+    int YborderPlacement = ui->showMultipleChoice(
+        "Where would you like to place the border (y value)?", {"1", "2", "3", "4", "5", "6", "7"});
+
+
 
     while (1)
     {
-        switch (borderPlacement)
-        {
-        case 1: {
-            coordinate = new Coordinate(0, 0);
-            break;
-        }
-        case 2: {
-            coordinate = new Coordinate(4, 2);
-            break;
-        }
-        case 3: {
-            coordinate = new Coordinate(2, 4);
-            break;
-        }
-        }
+        coordinate = new Coordinate(XborderPlacement, YborderPlacement);
 
-        if (gameField->isValidCoordinate( *coordinate))
+        if (gameField->isValidCoordinate(*coordinate))
         {
             auto borderDesicion =
                 std::make_shared<PlaceBorderDecision>(borderOrientation, *coordinate);
@@ -128,7 +119,11 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
             }
         }
 
-        ui->showMultipleChoice("This placement is invalid! Please select another one:?",
-                               {"a", "b", "c"});
+        XborderPlacement =
+            ui->showMultipleChoice("This placement is invalid! Please select another x value:?",
+                                   {"1", "2", "3", "4", "5", "6", "7"});
+        YborderPlacement =
+            ui->showMultipleChoice("This placement is invalid! Please select another y value:?",
+                                   {"1", "2", "3", "4", "5", "6", "7"});
     }
 }
