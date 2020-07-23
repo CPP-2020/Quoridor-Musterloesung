@@ -67,7 +67,7 @@ Combinatorics::EdgeId GameField::getEdgeIdBetweenCoordinates(Coordinate const & 
 
 Combinatorics::Edge const & GameField::getEdgeBetweenCoordinates(Coordinate const & a, Coordinate const & b) const
 {
-    assert(edgeBetweenCoordinatesExists(a,b));
+	assert(!borderBetweenCoordinates(a,b));
     return m_graph.getEdge(getEdgeIdBetweenCoordinates(a,b));
 }
 
@@ -76,7 +76,7 @@ Combinatorics::Edge & GameField::getEdgeBetweenCoordinates(Coordinate const & a,
     return const_cast<Combinatorics::Edge &>(static_cast<GameField const *>(this)->getEdgeBetweenCoordinates(a,b));
 }
 
-bool GameField::edgeBetweenCoordinatesExists(Coordinate const & a, Coordinate const & b) const
+bool GameField::borderBetweenCoordinates(Coordinate const & a, Coordinate const & b) const
 {
     return getEdgeIdBetweenCoordinates(a, b) != Graph::INVALID_EDGE_ID;
 }

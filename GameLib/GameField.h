@@ -26,6 +26,8 @@ public:
 
     void setPlayerPosition(std::shared_ptr<Player const> &player, std::shared_ptr<Position const> position);
 
+	bool borderBetweenCoordinates(Coordinate const & a, Coordinate const & b) const;
+
 private:
     std::map<std::shared_ptr<Player const>, std::shared_ptr<Position const>> m_playerPositions;
 
@@ -34,7 +36,6 @@ private:
     Combinatorics::EdgeId getEdgeIdBetweenCoordinates(Coordinate const & a, Coordinate const & b) const;
     Combinatorics::Edge const & getEdgeBetweenCoordinates(Coordinate const & a, Coordinate const & b) const;
     Combinatorics::Edge & getEdgeBetweenCoordinates(Coordinate const & a, Coordinate const & b);
-    bool edgeBetweenCoordinatesExists(Coordinate const & a, Coordinate const & b) const;
 
     //////////////////
     /// Most likely you do not have to touch this
