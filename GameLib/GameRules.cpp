@@ -4,6 +4,6 @@
 
 #include "GameRules.h"
 
-void GameRules::didPlayerWin(const PlayerId &playerId, const GameField &gameField) {
+bool GameRules::didPlayerWin(const PlayerId &playerId, const GameField &gameField) {
 
 }
