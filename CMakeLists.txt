@@ -41,6 +41,8 @@ add_library(GameLib
     GameLib/Position.cpp
     GameLib/Coordinate.h
     GameLib/Coordinate.cpp
+    GameLib/RandomBot.h
+    GameLib/RandomBot.cpp
     GameLib/HumanPlayer.h
     GameLib/HumanPlayer.cpp
         GameLib/Ui.cpp GameLib/Ui.h GameLib/GameHost.cpp GameLib/GameHost.h GameLib/Player.cpp GameLib/Player.h GameLib/GameRules.cpp GameLib/GameRules.h GameLib/GameDecision.cpp GameLib/GameDecision.h GameLib/PlaceBorderDecision.cpp GameLib/PlaceBorderDecision.h GameLib/MovePlayerDecision.cpp GameLib/MovePlayerDecision.h GameLib/DummyPlayer.cpp GameLib/DummyPlayer.h)
