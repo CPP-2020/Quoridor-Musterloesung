@@ -3,6 +3,8 @@
 //
 
 #include "MovePlayerDecision.h"
+#include "Position.h"
+#include "GameField.h"
 
 MovePlayerDecision::MovePlayerDecision(Direction direction)
 	: direction(direction)
@@ -12,9 +14,9 @@ MovePlayerDecision::MovePlayerDecision(Direction direction)
 
 bool MovePlayerDecision::isValidMove(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const
 {
-	return !isBorderInTheWay(gameField) &&
-		   !isOutOfGameField(gameField) &&
-		   !isOtherPlayerInTheWay(gameField);
+	return !isBorderInTheWay(player, gameField) &&
+		   !isOutOfGameField(player, gameField) &&
+		   !isOtherPlayerInTheWay(player, gameField);
 }
 
 void MovePlayerDecision::executeMove(std::shared_ptr<Player> player, std::shared_ptr<GameField> gameField)
@@ -22,23 +24,34 @@ void MovePlayerDecision::executeMove(std::shared_ptr<Player> player, std::shared
 
 }
 
-bool MovePlayerDecision::isBorderInTheWay(std::shared_ptr<const GameField> gameField) const
+bool MovePlayerDecision::isBorderInTheWay(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const
 {
-	// What the current player is --> ?
-	// x Where the player currently is (coordinates), --> Public GameField method
-	// Where the next coordinate in the specified direction is --> Public coordinate method
-	// x Wether there is an edge between these coordinates --> Private GameField method
-	//gameField->getPlayerPosition(player)
+	auto currentPlayerCoordinate = gameField->getPlayerPosition(player);
+	std::shared_ptr<const Coordinate> nextPlayerCoordinate;
+	switch (direction) {
+		case Direction::Up:
+			nextPlayerCoordinate = std::make_shared<const Coordinate>(currentPlayerCoordinate->getAboveCoordinate());
+			break;
+		case Direction::Down:
+			nextPlayerCoordinate = std::make_shared<const Coordinate>(currentPlayerCoordinate->getBelowCoordinate());
+			break;
+		case Direction::Left:
+			nextPlayerCoordinate = std::make_shared<const Coordinate>(currentPlayerCoordinate->getLeftCoordinate());
+			break;
+		case Direction::Right:
+			nextPlayerCoordinate = std::make_shared<const Coordinate>(currentPlayerCoordinate->getRightCoordinate());
+			break;
+	}
+	return !gameField->noBorderBetweenCoordinates(*currentPlayerCoordinate, *nextPlayerCoordinate);
+}
+
+bool MovePlayerDecision::isOutOfGameField(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const
+{
+
     return false;
 }
 
-bool MovePlayerDecision::isOutOfGameField(std::shared_ptr<const GameField> gameField) const
-{
-
-    return false;
-}
-
-bool MovePlayerDecision::isOtherPlayerInTheWay(std::shared_ptr<const GameField> gameField) const
+bool MovePlayerDecision::isOtherPlayerInTheWay(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const
 {
     return false;
 }

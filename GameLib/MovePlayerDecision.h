@@ -23,10 +23,9 @@ public:
 
 private:
 	Direction direction;
-	// Keine Mauer, Spielfeld nicht zu Ende, anderer Spieler
-	bool isBorderInTheWay(std::shared_ptr<const GameField> gameField) const;
-	bool isOutOfGameField(std::shared_ptr<const GameField> gameField) const;
-	bool isOtherPlayerInTheWay(std::shared_ptr<const GameField> gameField) const;
+	bool isBorderInTheWay(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const;
+	bool isOutOfGameField(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const;
+	bool isOtherPlayerInTheWay(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const;
 };
 
 
