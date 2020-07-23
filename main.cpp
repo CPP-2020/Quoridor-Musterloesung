@@ -1,14 +1,14 @@
-#include "GameLib\Ui.h"
-#include "GameLib\GameHost.h"
-#include "GameLib\Player.h"
-//#include "GameLib\HumanPlayer.h"
+#include "GameLib/Ui.h"
+#include "GameLib/GameHost.h"
+#include "GameLib/Player.h"
+//#include "GameLib/HumanPlayer.h"
 #include "GameLib/GameField.h"
-#include "GameLib/PlayerId.h"
+
 
 #include <memory>
 
 void startGame(std::shared_ptr<Ui> ui);
-std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int playerNumber);
+std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int playerId);
 
 int main()
 {
@@ -45,16 +45,16 @@ void startGame(std::shared_ptr<Ui> ui)
 }
 
 
-std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int playerNumber) //playerNumber instead of teamEnum
+std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int playerId) 
 {
     std::string message;
     auto PlayerData = std::make_shared<PlayerId>();
 
-    if (playerNumber == 1)
+    if (playerId == 1)
     {
         message = "What should be the first player?";
     }
-    else if (playerNumber == 2)
+    else if (playerId == 2)
     {
         message = "What should be the second player?";
     }
@@ -63,9 +63,7 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
 
     if (choice == 1)
     {
-        PlayerData->setName("Player " + std::to_string(playerNumber));
-        PlayerData->setId(playerNumber);
-      //return std::make_shared<HumanPlayer>(playerData);
+      return std::make_shared<Player>("Player " + std::to_string(playerId), playerId);
     }
 
     if (choice == 2)

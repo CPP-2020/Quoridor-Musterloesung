@@ -10,6 +10,9 @@
 #include <iostream>
 #include <memory>
 
+// Without NOMINMAX, windows.h defines a max() macro
+// which conflicts with std::numeric_limits<std::streamsize>::max().
+#define NOMINMAX
 #ifdef _WIN32
 	#include <windows.h>
 #else
