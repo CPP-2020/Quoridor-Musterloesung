@@ -9,10 +9,13 @@
 #include "Ui.h"
 #include "Player.h"
 #include "GameRules.h"
+#include <memory>
+#include <vector>
 
 class GameHost {
 public:
-    GameHost(std::shared_ptr<Ui>& ui, std::vector<std::shared_ptr<Player>>& players);
+
+    GameHost(std::shared_ptr<Ui> &ui, std::vector<std::shared_ptr<Player>> &players);
 
     void startGame();
 
