@@ -10,5 +10,5 @@ add_executable(
     Google_Tests_run
     testcases/test_sample.cpp
     testcases/graph_tests.cpp
-    testcases/gamelib_tests.cpp)
+    testcases/gamelib_tests.cpp testcases/GameRules_tests.cpp)
 target_link_libraries(Google_Tests_run gtest gtest_main GraphLib LoggerLib GameLib)

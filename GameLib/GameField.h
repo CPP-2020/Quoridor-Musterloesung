@@ -11,6 +11,13 @@
 
 class Player;
 
+enum class BoardSides {
+    Left,
+    Right,
+    Top,
+    Bottom,
+};
+
 class GameField {
 public:
     GameField();
@@ -22,14 +29,13 @@ public:
 	bool isOpenBelowCoordinate(Coordinate const & coordinate) const;
 	bool isOpenLeftOfCoordinate(Coordinate const & coordinate) const;
 
-    std::shared_ptr<Position const> getPlayerPosition(std::shared_ptr<Player const> const &player) const;
-
-    void setPlayerPosition(std::shared_ptr<Player const> &player, std::shared_ptr<Position const> position);
+    std::shared_ptr<Coordinate const> getPlayerPosition(std::shared_ptr<Player const> const &player) const;
+    void setPlayerPosition(std::shared_ptr<Player const> &player, std::shared_ptr<Coordinate const> position);
 
 	bool borderBetweenCoordinates(Coordinate const & a, Coordinate const & b) const;
 
 private:
-    std::map<std::shared_ptr<Player const>, std::shared_ptr<Position const>> m_playerPositions;
+    std::map<std::shared_ptr<Player const>, std::shared_ptr<Coordinate const>> m_playerPositions;
 
     Position & getPosition(Coordinate const & coordinates);
     // Returns corresponding EdgeId and Graph::INVALID_EDGE_ID if edge is already removed
