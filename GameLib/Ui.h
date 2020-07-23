@@ -10,10 +10,14 @@
 
 class Ui {
 public:
-    void drawGame(const GameField& gameField) const;
-    void showWinnerMessage(const PlayerId& playerId) const;
-    void showMessage(const std::string& message) const;
-    int showMultipleChoice(const std::string& message, const std::vector<std::string>& answers) const;
+	void drawGame(const GameField& gameField) const;
+  void showWinnerMessage(const PlayerId& playerId) const;
+	int	 showMultipleChoice(const std::string& message, const std::vector<std::string>& answers) const;
+
+private:
+  void clearScreen() const;
+  void appendDelimiter(std::string & result, const GameField &gameField, Coordinate const & coordinate) const;
+	void appendContent(std::string & result, const GameField &gameField, Coordinate const & coordinate) const;
 };
 
 

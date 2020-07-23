@@ -48,4 +48,9 @@ add_executable(
     main.cpp
 )
 
+if(UNIX)
+    target_link_libraries(GameLib -lterminfo)
+endif(UNIX)
+
 target_link_libraries(Hackathon GameLib GraphLib LoggerLib)
+
