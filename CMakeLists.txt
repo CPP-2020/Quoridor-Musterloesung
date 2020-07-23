@@ -43,6 +43,8 @@ add_library(GameLib
     GameLib/Coordinate.cpp
     GameLib/RandomBot.h
     GameLib/RandomBot.cpp
+    GameLib/HumanPlayer.h
+    GameLib/HumanPlayer.cpp
         GameLib/Ui.cpp GameLib/Ui.h GameLib/GameHost.cpp GameLib/GameHost.h GameLib/Player.cpp GameLib/Player.h GameLib/GameRules.cpp GameLib/GameRules.h GameLib/GameDecision.cpp GameLib/GameDecision.h GameLib/PlaceBorderDecision.cpp GameLib/PlaceBorderDecision.h GameLib/MovePlayerDecision.cpp GameLib/MovePlayerDecision.h GameLib/DummyPlayer.cpp GameLib/DummyPlayer.h)
 
 add_executable(
@@ -51,7 +53,7 @@ add_executable(
 )
 
 if(UNIX)
-    target_link_libraries(GameLib -lterminfo)
+    target_link_libraries(GameLib -lcurses)
 endif(UNIX)
 
 target_link_libraries(Hackathon GameLib GraphLib LoggerLib)

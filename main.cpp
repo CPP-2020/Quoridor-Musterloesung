@@ -1,7 +1,7 @@
 #include "GameLib/Ui.h"
 #include "GameLib/GameHost.h"
 #include "GameLib/Player.h"
-//#include "GameLib/HumanPlayer.h"
+#include "GameLib/HumanPlayer.h"
 #include "GameLib/GameField.h"
 
 
@@ -63,7 +63,7 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
 
     if (choice == 1)
     {
-      //return std::make_shared<Player>("Player " + std::to_string(playerId), playerId);
+      return std::make_shared<HumanPlayer>("Player " + std::to_string(playerId), playerId, BoardSides::Right, ui);
     }
 
     if (choice == 2)
