@@ -15,9 +15,12 @@ class Player {
 public:
 	Player(const std::string &name, const int &id, const BoardSides &startSide);
 
-	std::string getName() const;
-	int getID() const;
+    int getID() const;
+    std::string getName() const;
     BoardSides getStartSide() const;
+
+    int getRemainingBorders() const;
+    void setRemainingBorders(int borders);
 
 	virtual std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) = 0;
 
@@ -25,6 +28,7 @@ private:
 	std::string name;
 	int id;
     BoardSides startSide;
+    int remainingBorders;
 };
 
 
