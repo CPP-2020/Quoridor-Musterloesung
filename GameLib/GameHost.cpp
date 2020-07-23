@@ -4,7 +4,7 @@
 
 #include "GameHost.h"
 
-GameHost::GameHost(Ui &ui, std::vector<Player> players) {
+GameHost::GameHost(std::shared_ptr<Ui> &ui, std::vector<std::shared_ptr<Player>> &players) {
 
 }
 

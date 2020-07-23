@@ -3,3 +3,8 @@
 //
 
 #include "Player.h"
+
+Player::Player(std::shared_ptr<PlayerId> &newPlayerData) : playerData(newPlayerData)
+{
+
+}
