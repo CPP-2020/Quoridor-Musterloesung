@@ -9,5 +9,16 @@
 
 bool GameRules::didPlayerWin(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField)
 {
-	return false;
+    auto startSide = player->getStartSide();
+
+    int columnToCheck = -1;
+
+    if(startSide == BoardSides::Left){
+        columnToCheck = gameField->getWidth() - 1;
+    }
+    else if (startSide == BoardSides::Right) {
+        columnToCheck = 0;
+    }
+
+    return gameField->getPlayerPosition(player)->x() == columnToCheck;
 }

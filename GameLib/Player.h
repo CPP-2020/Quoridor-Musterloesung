@@ -13,18 +13,18 @@ class GameField;
 
 class Player {
 public:
-	Player(const std::string &name, const int &id);
+	Player(const std::string &name, const int &id, const BoardSides &startSide);
 
 	std::string getName() const;
 	int getID() const;
-	void setName(std::string newName);
-	void setId(int newId);
+    BoardSides getStartSide() const;
 
-	virtual GameDecision getGameDecision(std::shared_ptr<GameField const> gameField) = 0;
+	virtual std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) = 0;
 
 private:
 	std::string name;
 	int id;
+    BoardSides startSide;
 };
 
 

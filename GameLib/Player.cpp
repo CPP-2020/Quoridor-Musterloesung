@@ -4,27 +4,24 @@
 
 #include "Player.h"
 
-Player::Player(const std::string &name, const int &id) : name(name), id(id)
+Player::Player(const std::string &name, const int &id, const BoardSides &startSide)
+        : name(name)
+        , id(id)
+        , startSide(startSide)
 {
-
 }
 
 std::string Player::getName() const
 {
-	return name;
+    return name;
 }
 
 int Player::getID() const
 {
-	return id;
+    return id;
 }
 
-void Player::setName(std::string newName)
+BoardSides Player::getStartSide() const
 {
-	name = newName;
-}
-
-void Player::setId(int newId)
-{
-	id = newId;
+    return startSide;
 }
