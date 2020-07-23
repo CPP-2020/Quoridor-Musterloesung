@@ -5,11 +5,11 @@
 #ifndef HACKATHON_PLAYER_H
 #define HACKATHON_PLAYER_H
 
-
 #include <string>
 #include "GameDecision.h"
-#include "GameField.h"
 #include <memory>
+
+class GameField;
 
 class Player {
 public:
@@ -20,7 +20,7 @@ public:
 	void setName(std::string newName);
 	void setId(int newId);
 
-	virtual GameDecision getGameDecision(std::shared_ptr<const GameField> gameField) = 0;
+	virtual GameDecision getGameDecision(std::shared_ptr<GameField const> gameField) = 0;
 
 private:
 	std::string name;
