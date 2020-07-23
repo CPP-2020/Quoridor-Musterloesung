@@ -84,7 +84,7 @@ void Ui::appendContent(std::string & result, std::shared_ptr<const GameField> ga
 	result.append(gameField->getPosition(coordinate).toString());
 }
 
-void Ui::showWinnerMessage(std::shared_ptr<const Player> player) const {
+void Ui::showWinnerMessage(std::shared_ptr<const PlayerData> player) const {
 	std::cout << "Player " << player->getName() << " has won! Congrats!" << std::endl;
 }
 
@@ -159,4 +159,3 @@ void Ui::clearScreen() const {
 	}
 #endif
 }
-

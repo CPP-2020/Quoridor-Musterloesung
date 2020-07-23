@@ -7,7 +7,7 @@
 #include "Player.h"
 
 
-bool GameRules::didPlayerWin(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField)
+bool GameRules::didPlayerWin(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField)
 {
     auto startSide = player->getStartSide();
 

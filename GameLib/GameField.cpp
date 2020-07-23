@@ -1,4 +1,5 @@
 #include "GameField.h"
+#include "GameField.h"
 #include "cassert"
 
 using Combinatorics::Edge;
@@ -57,6 +58,7 @@ bool GameField::isOpenLeftOfCoordinate(const Coordinate &coordinate) const
                            getPosition(coordinate.getLeftCoordinate()).getVertex());
 }
 
+
 Position &GameField::getPosition(Coordinate const &coordinate)
 {
     return *m_field.at(coordinate.x()).at(coordinate.y());
@@ -97,19 +99,19 @@ void GameField::setBorderBetweenCoordinates(const Coordinate &a, const Coordinat
 }
 
 std::shared_ptr<Coordinate const> GameField::getPlayerPosition(
-    const std::shared_ptr<const Player> &player) const
+    const std::shared_ptr<const PlayerData> &player) const
 {
     assert(m_playerPositions.find(player) != m_playerPositions.end());
 
     return m_playerPositions.at(player);
 }
-void GameField::setPlayerPosition(std::shared_ptr<const Player> &player,
+void GameField::setPlayerPosition(std::shared_ptr<const PlayerData> player,
                                   std::shared_ptr<const Coordinate> position)
 {
     m_playerPositions[player] = position;
 }
 
-bool GameField::isValidCoordinate(const Coordinate coordinate) const
+bool GameField::isValidCoordinate(const Coordinate &coordinate) const
 {
     bool xValid = coordinate.x() >= 0 && coordinate.x() < s_width;
     bool yValid = coordinate.y() >= 0 && coordinate.y() < s_height;

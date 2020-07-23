@@ -7,29 +7,21 @@
 
 #include "GameDecision.h"
 #include "GameField.h"
+#include "PlayerData.h"
 
-#include <string>
 #include <memory>
+#include <string>
 
-
-class Player : public std::enable_shared_from_this<Player> {
+class Player {
 public:
-	Player(const std::string &name, const int &id, const BoardSides &startSide);
-
-    int getID() const;
-    std::string getName() const;
-    BoardSides getStartSide() const;
-
-    int getRemainingBorders() const;
-    void setRemainingBorders(int borders);
-
+	Player(std::shared_ptr<PlayerData> playerData);
 	virtual std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) = 0;
 
-private:
-	std::string name;
-	int id;
-    BoardSides startSide;
-    int remainingBorders;
+    std::shared_ptr<PlayerData const> getPlayerData() const;
+    std::shared_ptr<PlayerData> getPlayerData();
+
+  protected:
+    std::shared_ptr<PlayerData> playerData;
 };
 
 
