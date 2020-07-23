@@ -5,11 +5,12 @@
 #ifndef HACKATHON_PLAYER_H
 #define HACKATHON_PLAYER_H
 
-#include <string>
 #include "GameDecision.h"
+#include "GameField.h"
+
+#include <string>
 #include <memory>
 
-class GameField;
 
 class Player {
 public:
