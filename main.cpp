@@ -12,14 +12,14 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
 
 int main()
 {
-    auto ui = std::make_shared<Ui>();    
-    
+    auto ui = std::make_shared<Ui>();
+
     bool exit = false;
 
     while (!exit)
     {
         int choice =
-            ui->showMultipleChoice("What would you like to do?", { "Start game", "Exit game" });
+            ui->showMultipleChoice("What would you like to do?", {"Start game", "Exit game"});
 
         if (choice == 1)
         {
@@ -44,11 +44,10 @@ void startGame(std::shared_ptr<Ui> ui)
     gameHost->startGame();
 }
 
-
-std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int playerId) 
+std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int playerId)
 {
     std::string message;
-    //auto PlayerData = std::make_shared<Player>();
+    // auto PlayerData = std::make_shared<Player>();
 
     if (playerId == 1)
     {
@@ -63,12 +62,16 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
 
     if (choice == 1)
     {
-      return std::make_shared<HumanPlayer>("Player " + std::to_string(playerId), playerId, BoardSides::Right, ui);
+        return std::make_shared<HumanPlayer>(
+            std::make_shared<PlayerData>(
+                "Player " + std::to_string(playerId), playerId, BoardSides::Right),
+            ui);
     }
 
     if (choice == 2)
     {
-        return std::make_shared<RandomBot>("Player " + std::to_string(playerId), playerId, BoardSides::Right);
+        return std::make_shared<RandomBot>(std::make_shared<PlayerData>(
+            "Player " + std::to_string(playerId), playerId, BoardSides::Right));
     }
 
     if (choice == 3)

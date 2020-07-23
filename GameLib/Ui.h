@@ -14,7 +14,7 @@ class Ui
 {
   public:
     void drawGame(std::shared_ptr<const GameField> gameField) const;
-    void showWinnerMessage(std::shared_ptr<const Player> player) const;
+    void showWinnerMessage(std::shared_ptr<const PlayerData> player) const;
     void showMessage(const std::string &message) const;
     int showMultipleChoice(const std::string &message,
                            const std::vector<std::string> &answers) const;

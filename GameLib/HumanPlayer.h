@@ -9,12 +9,11 @@
 
 class Ui;
 
-class HumanPlayer : public Player, std::enable_shared_from_this<HumanPlayer>
+class HumanPlayer : public Player
 {
 public:
-	HumanPlayer(const std::string &name, const int &id, const BoardSides &startSide, std::shared_ptr<Ui> ui);
-
-	std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) override;
+  HumanPlayer(std::shared_ptr<PlayerData> playerData, std::shared_ptr<Ui> ui);
+  std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) override;
 
 private:
 	std::shared_ptr<Ui> ui;

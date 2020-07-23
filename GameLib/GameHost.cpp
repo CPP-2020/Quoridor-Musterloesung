@@ -35,20 +35,20 @@ void GameHost::startGame()
         while(!decisionValid){
             auto gameDecision = currentPlayer->getGameDecision(gameField);
 
-            decisionValid = gameDecision->isValidMove(currentPlayer, gameField);
+            decisionValid = gameDecision->isValidMove(currentPlayer->getPlayerData(), gameField);
 
             if(decisionValid){
-                gameDecision->executeMove(currentPlayer, gameField);
+                gameDecision->executeMove(currentPlayer->getPlayerData(), gameField);
             }
         }
 
         ui->drawGame(gameField);
 
-        const bool win = gameRules->didPlayerWin(currentPlayer, gameField);
+        const bool win = gameRules->didPlayerWin(currentPlayer->getPlayerData(), gameField);
 
         if (win)
         {
-            ui->showWinnerMessage(currentPlayer);
+            ui->showWinnerMessage(currentPlayer->getPlayerData());
             break;
         }
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
@@ -60,9 +60,9 @@ void GameHost::placePlayersOnField() const
     int height = gameField->getHeight();
     int width = gameField->getWidth();
 
-    gameField->setPlayerPosition(std::const_pointer_cast<const Player>(players[0]),
+    gameField->setPlayerPosition(players[0]->getPlayerData(),
                                  std::make_shared<Coordinate>(0, height / 2));
 
-    gameField->setPlayerPosition(std::const_pointer_cast<const Player>(players[1]),
+    gameField->setPlayerPosition(players[1]->getPlayerData(),
                                  std::make_shared<Coordinate>(width - 1, height / 2));
 }

@@ -9,6 +9,11 @@
 #include "PlaceBorderDecision.h"
 
 
+RandomBot::RandomBot(std::shared_ptr<PlayerData> playerData)
+    : Player(playerData)
+{
+}
+
 std::shared_ptr<GameDecision> RandomBot::getGameDecision(std::shared_ptr<GameField const> gameField)
 {
     srand((unsigned)time(0));
@@ -21,7 +26,7 @@ std::shared_ptr<GameDecision> RandomBot::getGameDecision(std::shared_ptr<GameFie
         {
             Direction moveDirection = (Direction)(rand() % 4);
             auto moveDecision = std::make_shared<MovePlayerDecision>(moveDirection);
-            if (moveDecision->isValidMove(shared_from_this(), gameField))
+            if (moveDecision->isValidMove(playerData, gameField))
             {
                 return moveDecision;
             }
@@ -52,8 +57,4 @@ std::shared_ptr<GameDecision> RandomBot::getGameDecision(std::shared_ptr<GameFie
 
     }
 
-}
-RandomBot::RandomBot(const std::string &name, const int &id, const BoardSides &startSide)
-        : Player(name, id, startSide)
-{
 }

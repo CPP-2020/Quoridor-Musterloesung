@@ -4,34 +4,17 @@
 
 #include "Player.h"
 
-Player::Player(const std::string &name, const int &id, const BoardSides &startSide)
-        : name(name)
-        , id(id)
-        , startSide(startSide)
+Player::Player(std::shared_ptr<PlayerData> playerData)
+        : playerData(playerData)
 {
 }
 
-std::string Player::getName() const
+std::shared_ptr<PlayerData const> Player::getPlayerData() const
 {
-    return name;
+    return playerData;
 }
 
-int Player::getID() const
+std::shared_ptr<PlayerData> Player::getPlayerData()
 {
-    return id;
-}
-
-BoardSides Player::getStartSide() const
-{
-    return startSide;
-}
-
-int Player::getRemainingBorders() const
-{
-    return remainingBorders;
-}
-
-void Player::setRemainingBorders(int borders)
-{
-    remainingBorders = borders;
+    return playerData;
 }

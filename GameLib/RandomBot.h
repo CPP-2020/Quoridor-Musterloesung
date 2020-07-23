@@ -9,11 +9,10 @@
 #include "Player.h"
 
 
-class RandomBot : public Player, std::enable_shared_from_this<RandomBot>
+class RandomBot : public Player
 {
   public:
-    RandomBot(const std::string &name, const int &id, const BoardSides &startSide);
-
+    RandomBot(std::shared_ptr<PlayerData> playerData);
     std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) override;
 };
 

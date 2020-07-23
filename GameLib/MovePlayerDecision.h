@@ -6,6 +6,7 @@
 #define HACKATHON_MOVEPLAYERDECISION_H
 
 #include "GameDecision.h"
+#include "PlayerData.h"
 
 enum Direction {
     Up,
@@ -18,14 +19,14 @@ class MovePlayerDecision : public GameDecision {
 public:
 	MovePlayerDecision(Direction direction);
 
-	bool isValidMove(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const override;
-	void executeMove(std::shared_ptr<Player> player, std::shared_ptr<GameField> gameField) override;
+	bool isValidMove(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const override;
+	void executeMove(std::shared_ptr<PlayerData> player, std::shared_ptr<GameField> gameField) override;
 
 private:
 	Direction direction;
-	bool isBorderInTheWay(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const;
-	bool isOutOfGameField(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const;
-	bool isOtherPlayerInTheWay(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const;
+	bool isBorderInTheWay(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
+	bool isOutOfGameField(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
+	bool isOtherPlayerInTheWay(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
 };
 
 
