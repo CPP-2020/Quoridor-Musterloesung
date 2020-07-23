@@ -7,7 +7,6 @@
 GameHost::GameHost(std::shared_ptr<Ui>& ui, std::vector<std::shared_ptr<Player>>& players)
 	:ui(ui)
 	,players(players)
-
 {
 
 }
@@ -20,7 +19,7 @@ void GameHost::startGame()
 
 	ui->drawGame();
 
-	while (true)  //Zeit für ein D D D D DUELL
+	while (true)  //Zeit fÃ¼r ein D D D D DUELL
 	{
 		const auto currentPlayer = players[currentPlayerIndex];
 		const auto nextPlayerIndex = (currentPlayerIndex + 1) %2;

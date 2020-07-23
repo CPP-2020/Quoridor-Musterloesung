@@ -3,7 +3,7 @@
 //
 
 #include "Ui.h"
-
+#include <iostream>
 void Ui::drawGame(const GameField &gameField) const {
 
 }
@@ -16,7 +16,8 @@ void Ui::showMessage(const std::string &message) const {
 
 }
 
-void Ui::showMultipleChoice(const std::string &message, const std::vector<std::string> &answers) const {
+int Ui::showMultipleChoice(const std::string &message, const std::vector<std::string> &answers) const {
 
+	return 0;
 }
 

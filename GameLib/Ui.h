@@ -13,7 +13,7 @@ public:
     void drawGame(const GameField& gameField) const;
     void showWinnerMessage(const PlayerId& playerId) const;
     void showMessage(const std::string& message) const;
-    void showMultipleChoice(const std::string& message, const std::vector<std::string>& answers) const;
+    int showMultipleChoice(const std::string& message, const std::vector<std::string>& answers) const;
 };
 
 
