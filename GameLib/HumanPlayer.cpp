@@ -121,7 +121,11 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
         {
             auto borderDesicion =
                 std::make_shared<PlaceBorderDecision>(borderOrientation, *coordinate);
-            return borderDesicion;
+
+            if (borderDesicion->isValidMove(shared_from_this(), gameField))
+            {
+                return borderDesicion;
+            }
         }
 
         ui->showMultipleChoice("This placement is invalid! Please select another one:?",
