@@ -17,18 +17,18 @@ void GameHost::startGame()
 
 	int currentPlayerIndex = 0;
 
-	ui->drawGame();
+	ui->drawGame(gameField);
 
 	while (true)  //Zeit für ein D D D D DUELL
 	{
 		const auto currentPlayer = players[currentPlayerIndex];
 		const auto nextPlayerIndex = (currentPlayerIndex + 1) %2;
 
-		currentPlayer->getGameDecision();
+		currentPlayer->getGameDecision(gameField);
 
-		ui->drawGame(GameField);
+		ui->drawGame(gameField);
 
-		const bool win = gameRules->didPlayerWin(currentPlayer);
+		const bool win = gameRules->didPlayerWin(currentPlayer, gameField);
 
 		if (win)
 		{

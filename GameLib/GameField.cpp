@@ -91,7 +91,3 @@ void GameField::setPlayerPosition(std::shared_ptr<const PlayerId> &playerId,
                                   std::shared_ptr<Position const> position) {
   m_playerPositions[playerId] = position;
 }
-
-int GameField::getHeight() const { return s_height; }
-
-int GameField::getWidth() const { return s_width; }
