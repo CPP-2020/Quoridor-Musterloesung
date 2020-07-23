@@ -19,7 +19,7 @@ Coordinate Coordinate::getLeftCoordinate() const
 
 Coordinate Coordinate::getAboveCoordinate() const
 {
-    return Coordinate(x(), y()+1);
+    return Coordinate(x(), y()-1);
 }
 
 Coordinate Coordinate::getRightCoordinate() const
@@ -29,7 +29,7 @@ Coordinate Coordinate::getRightCoordinate() const
 
 Coordinate Coordinate::getBelowCoordinate() const
 {
-    return Coordinate(x(), y()-1);
+    return Coordinate(x(), y()+1);
 }
 
 int Coordinate::x() const
