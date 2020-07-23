@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Graph/Graph.h"
-#include "Player.h"
 #include "Position.h"
 
 #include <array>
@@ -9,6 +8,8 @@
 #include <map>
 #include <memory>
 #include <string>
+
+class Player;
 
 class GameField {
 public:
@@ -44,3 +45,4 @@ private:
 
     const Position &at(int x, int y) const;
 };
+

@@ -5,8 +5,9 @@
 #ifndef HACKATHON_GAMEDECISION_H
 #define HACKATHON_GAMEDECISION_H
 
-
 #include "GameField.h"
+
+class GameField;
 
 class GameDecision {
 public:
