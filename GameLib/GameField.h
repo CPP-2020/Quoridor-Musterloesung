@@ -25,8 +25,6 @@ public:
 
     void setPlayerPosition(std::shared_ptr<PlayerId const> &playerId, std::shared_ptr<Position const> position);
 
-    int getWidth() const;
-    int getHeight() const;
 private:
     std::map<std::shared_ptr<PlayerId const>, std::shared_ptr<Position const>> m_playerPositions;
 

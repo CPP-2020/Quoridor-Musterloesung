@@ -7,11 +7,14 @@
 
 
 #include "PlayerId.h"
-#include "GameField.h"
+#include <memory>
+
+class Player;
+class GameField;
 
 class GameRules {
 public:
-    bool didPlayerWin(const PlayerId& playerId, const GameField& gameField);
+	bool didPlayerWin(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField);
 };
 
 

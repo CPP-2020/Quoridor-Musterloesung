@@ -3,8 +3,12 @@
 //
 
 #include "Ui.h"
+#include "GameField.h"
+#include "Player.h"
+#include "Coordinate.h"
 #include <vector>
 #include <iostream>
+#include <memory>
 
 #ifdef _WIN32
 	#include <windows.h>
@@ -20,14 +24,14 @@ static std::string const delimiter_y_open = " ";
 static std::string const delimiter_y_closed = "-";
 static std::string const delimiter_y_barrier_check = "~";
 
-void Ui::drawGame(const GameField &gameField) const {
+void Ui::drawGame(std::shared_ptr<const GameField> gameField) const {
 	std::string result;
-	for (int y = 0; y < gameField.getHeight(); y++) {
-		for (int x = 0; x < gameField.getWidth(); x++) {
+	for (int y = 0; y < gameField->getHeight(); y++) {
+		for (int x = 0; x < gameField->getWidth(); x++) {
 			appendDelimiter(result, gameField,Coordinate(x, y));
 		}
 		result.append("\n");
-		for (int x = 0; x < gameField.getWidth(); x++) {
+		for (int x = 0; x < gameField->getWidth(); x++) {
 			appendContent(result, gameField, Coordinate(x, y));
 		}
 		result.append("\n");
@@ -35,8 +39,8 @@ void Ui::drawGame(const GameField &gameField) const {
 	std::cout << result << std::endl;
 }
 
-void Ui::showWinnerMessage(const PlayerId &playerId) const {
-	std::cout << "Player " << playerId.getName() << " has won! Congrats!" << std::endl;
+void Ui::showWinnerMessage(std::shared_ptr<const Player> player) const {
+	std::cout << "Player " << player->getName() << " has won! Congrats!" << std::endl;
 }
 
 int Ui::showMultipleChoice(const std::string &message, const std::vector<std::string> &answers) const {
@@ -111,10 +115,10 @@ void Ui::clearScreen() const {
 #endif
 }
 
-void Ui::appendDelimiter(std::string & result, const GameField &gameField, Coordinate const & coordinate) const
+void Ui::appendDelimiter(std::string & result, std::shared_ptr<const GameField> gameField, Coordinate const & coordinate) const
 {
 	if (coordinate.y() != 0) {
-		if (gameField.isOpenBelowCoordinate(coordinate)) {
+		if (gameField->isOpenBelowCoordinate(coordinate)) {
 			result.append(delimiter_y_open);
 		} else {
 			result.append(delimiter_y_closed);
@@ -123,15 +127,15 @@ void Ui::appendDelimiter(std::string & result, const GameField &gameField, Coord
 	result.append(" ");
 }
 
-void Ui::appendContent(std::string & result, const GameField &gameField, Coordinate const & coordinate) const
+void Ui::appendContent(std::string & result, std::shared_ptr<const GameField> gameField, Coordinate const & coordinate) const
 {
 	if (coordinate.x() != 0) {
-		if (gameField.isOpenLeftOfCoordinate(coordinate)) {
+		if (gameField->isOpenLeftOfCoordinate(coordinate)) {
 			result.append(delimiter_x_open);
 		} else {
 			result.append(delimiter_x_closed);
 		}
 	}
-	result.append(gameField.getPosition(coordinate).toString());
+	result.append(gameField->getPosition(coordinate).toString());
 }
 

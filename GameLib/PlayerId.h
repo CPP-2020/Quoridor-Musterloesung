@@ -10,14 +10,10 @@
 class PlayerId {
 
 public:
-	std::string getName();
-	int getID();
-	void setName(std::string newName);
-	void setId(int NewId);
+
 
 private:
-	std::string name;
-	int id;
+
 
 
 

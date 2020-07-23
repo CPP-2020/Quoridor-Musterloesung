@@ -4,7 +4,27 @@
 
 #include "Player.h"
 
-Player::Player(std::shared_ptr<PlayerId> &newPlayerData) : playerData(newPlayerData)
+Player::Player(const std::string &name, const int &id) : name(name), id(id)
 {
 
+}
+
+std::string Player::getName() const
+{
+	return name;
+}
+
+int Player::getID() const
+{
+	return id;
+}
+
+void Player::setName(std::string newName)
+{
+	name = newName;
+}
+
+void Player::setId(int newId)
+{
+	id = newId;
 }

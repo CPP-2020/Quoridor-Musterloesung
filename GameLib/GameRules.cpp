@@ -3,7 +3,11 @@
 //
 
 #include "GameRules.h"
+#include "GameField.h"
+#include "Player.h"
 
-bool GameRules::didPlayerWin(const PlayerId &playerId, const GameField &gameField) {
 
+bool GameRules::didPlayerWin(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField)
+{
+	return false;
 }
