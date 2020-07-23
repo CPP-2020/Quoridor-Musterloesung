@@ -11,7 +11,7 @@
 
 class GameRules {
 public:
-    void didPlayerWin(const PlayerId& playerId, const GameField& gameField);
+    bool didPlayerWin(const PlayerId& playerId, const GameField& gameField);
 };
 
 
