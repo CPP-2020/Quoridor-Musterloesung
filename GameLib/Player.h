@@ -5,13 +5,14 @@
 #ifndef HACKATHON_PLAYER_H
 #define HACKATHON_PLAYER_H
 
-#include <string>
 #include "GameDecision.h"
+#include "GameField.h"
+
+#include <string>
 #include <memory>
 
-class GameField;
 
-class Player {
+class Player : public std::enable_shared_from_this<Player> {
 public:
 	Player(const std::string &name, const int &id, const BoardSides &startSide);
 

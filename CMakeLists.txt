@@ -51,7 +51,7 @@ add_executable(
 )
 
 if(UNIX)
-    target_link_libraries(GameLib -lterminfo)
+    target_link_libraries(GameLib -lcurses)
 endif(UNIX)
 
 target_link_libraries(Hackathon GameLib GraphLib LoggerLib)

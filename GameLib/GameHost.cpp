@@ -14,6 +14,7 @@ GameHost::GameHost(std::shared_ptr<Ui>& ui, std::vector<std::shared_ptr<Player>>
 void GameHost::startGame() 
 {
 	gameRules = std::make_shared<GameRules>();
+    gameField = std::make_shared<GameField>();
 
 	int currentPlayerIndex = 0;
 

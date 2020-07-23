@@ -25,6 +25,17 @@ bool PlaceBorderDecision::isValidMove(std::shared_ptr<const Player> player,
     auto bottomLeftCoordinate = topLeftCoordinate.getBelowCoordinate();
     auto bottomRightCoordinate = bottomLeftCoordinate.getRightCoordinate();
 
+    bool coordinateValid = true;
+    coordinateValid &= gameField->isValidCoordinate(topLeftCoordinate);
+    coordinateValid &= gameField->isValidCoordinate(topRightCoordinate);
+    coordinateValid &= gameField->isValidCoordinate(bottomLeftCoordinate);
+    coordinateValid &= gameField->isValidCoordinate(bottomRightCoordinate);
+
+    if (!coordinateValid)
+    {
+        return false;
+    }
+
     if (orientation == BorderOrientation::Horizontal)
     {
         return gameField->noBorderBetweenCoordinates(topLeftCoordinate, bottomLeftCoordinate) &&
