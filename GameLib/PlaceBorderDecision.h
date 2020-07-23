@@ -5,14 +5,27 @@
 #ifndef HACKATHON_PLACEBORDERDECISION_H
 #define HACKATHON_PLACEBORDERDECISION_H
 
-
 #include "GameDecision.h"
 
-class PlaceBorderDecision : public GameDecision {
-public:
-    bool isValidMove(const GameField &gameField) override;
-    void executeMove(GameField &gameField) override;
+enum class BorderOrientation
+{
+    Vertical,
+    Horizontal,
 };
 
+class PlaceBorderDecision : public GameDecision
+{
+  public:
+    PlaceBorderDecision(const std::shared_ptr<const Player> player,
+                        const BorderOrientation &orientation,
+                        const Coordinate &topLeftCoordinate);
 
-#endif //HACKATHON_PLACEBORDERDECISION_H
+    bool isValidMove(std::shared_ptr<const GameField> gameField) const override;
+    void executeMove(std::shared_ptr<GameField> gameField) override;
+
+  private:
+    BorderOrientation orientation;
+    Coordinate topLeftCoordinate;
+};
+
+#endif // HACKATHON_PLACEBORDERDECISION_H

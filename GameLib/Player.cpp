@@ -25,3 +25,13 @@ BoardSides Player::getStartSide() const
 {
     return startSide;
 }
+
+int Player::getRemainingBorders() const
+{
+    return remainingBorders;
+}
+
+void Player::setRemainingBorders(int borders)
+{
+    remainingBorders = borders;
+}
