@@ -16,6 +16,8 @@ public:
 
 private:
 	void clearScreen() const;
+	void appendDelimiter(std::string & result, const GameField &gameField, Coordinate const & coordinate) const;
+	void appendContent(std::string & result, const GameField &gameField, Coordinate const & coordinate) const;
 };
 
 

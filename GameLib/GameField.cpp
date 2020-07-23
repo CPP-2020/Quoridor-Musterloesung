@@ -9,13 +9,6 @@ using Combinatorics::Graph;
 using Combinatorics::Vertex;
 using Combinatorics::Edge;
 
-static std::string const delimiter_x_open = " ";
-static std::string const delimiter_x_closed = "|";
-static std::string const delimiter_x_barrier_check = "S";
-static std::string const delimiter_y_open = " ";
-static std::string const delimiter_y_closed = "-";
-static std::string const delimiter_y_barrier_check = "~";
-
 GameField::GameField()
 {
     for (int x = 0; x < s_width; x++) {
@@ -41,49 +34,29 @@ GameField::~GameField()
 {
 }
 
-std::string GameField::toString() const
+int GameField::getHeight() const
 {
-    std::string result;
-    for (int y = 0; y < s_height; y++) {
-        for (int x = 0; x < s_width; x++) {
-            printDelimiter(result, Coordinate(x, y));
-        }
-        result.append("\n");
-        for (int x = 0; x < s_width; x++) {
-            printContent(result, Coordinate(x, y));
-        }
-        result.append("\n");
-    }
-    return result;
+	return s_height;
 }
 
-void GameField::printDelimiter(std::string & result, Coordinate const & coordinate) const
+int GameField::getWidth() const
 {
-    if (coordinate.y() != 0) {
-        if (m_graph.hasEdge(getPosition(coordinate).getVertex(), getPosition(coordinate.getBelowCoordinate()).getVertex())) {
-            result.append(delimiter_y_open);
-        } else {
-            result.append(delimiter_y_closed);
-        }
-    }
-    result.append(" ");
-}
-
-void GameField::printContent(std::string & result, Coordinate const & coordinate) const
-{
-    if (coordinate.x() != 0) {
-        if (m_graph.hasEdge(getPosition(coordinate).getVertex(),getPosition(coordinate.getLeftCoordinate()).getVertex())) {
-            result.append(delimiter_x_open);
-        } else {
-            result.append(delimiter_x_closed);
-        }
-    }
-    result.append(getPosition(coordinate).toString());
+	return s_width;
 }
 
 const Position & GameField::getPosition(Coordinate const & coordinate) const
 {
-    return *m_field.at(coordinate.x()).at(coordinate.y());
+	return *m_field.at(coordinate.x()).at(coordinate.y());
+}
+
+bool GameField::isOpenBelowCoordinate(const Coordinate &coordinate) const
+{
+	return m_graph.hasEdge(getPosition(coordinate).getVertex(), getPosition(coordinate.getBelowCoordinate()).getVertex());
+}
+
+bool GameField::isOpenLeftOfCoordinate(const Coordinate &coordinate) const
+{
+	return m_graph.hasEdge(getPosition(coordinate).getVertex(), getPosition(coordinate.getLeftCoordinate()).getVertex());
 }
 
 Position & GameField::getPosition(Coordinate const & coordinate)

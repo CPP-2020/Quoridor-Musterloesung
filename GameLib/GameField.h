@@ -11,10 +11,13 @@
 class GameField {
 public:
     GameField();
-    virtual ~GameField();
-    std::string toString() const;
+	virtual ~GameField();
 
+	int getHeight() const;
+	int getWidth() const;
     const Position & getPosition(Coordinate const & coordinates) const;
+	bool isOpenBelowCoordinate(Coordinate const & coordinate) const;
+	bool isOpenLeftOfCoordinate(Coordinate const & coordinate) const;
 
 private:
 
@@ -30,8 +33,6 @@ private:
     Combinatorics::Graph m_graph;
     static constexpr int s_width {9};
     static constexpr int s_height {9};
-    void printDelimiter(std::string & result, Coordinate const & coordinate) const;
-    void printContent(std::string & result, Coordinate const & coordinate) const;
     std::array<std::array<std::unique_ptr<Position>, s_height>, s_width> m_field;
     const Position & at(int x, int y) const;
 };

@@ -4,6 +4,7 @@
 
 #include "Ui.h"
 #include <vector>
+#include <iostream>
 
 #ifdef _WIN32
 	#include <windows.h>
@@ -12,12 +13,30 @@
 	#include <unistd.h>
 #endif
 
-void Ui::drawGame(const GameField &gameField) const {
+static std::string const delimiter_x_open = " ";
+static std::string const delimiter_x_closed = "|";
+static std::string const delimiter_x_barrier_check = "S";
+static std::string const delimiter_y_open = " ";
+static std::string const delimiter_y_closed = "-";
+static std::string const delimiter_y_barrier_check = "~";
 
+void Ui::drawGame(const GameField &gameField) const {
+	std::string result;
+	for (int y = 0; y < gameField.getHeight(); y++) {
+		for (int x = 0; x < gameField.getWidth(); x++) {
+			appendDelimiter(result, gameField,Coordinate(x, y));
+		}
+		result.append("\n");
+		for (int x = 0; x < gameField.getWidth(); x++) {
+			appendContent(result, gameField, Coordinate(x, y));
+		}
+		result.append("\n");
+	}
+	std::cout << result << std::endl;
 }
 
 void Ui::showWinnerMessage(const PlayerId &playerId) const {
-
+	std::cout << "Player " << playerId.getName() << " has won! Congrats!" << std::endl;
 }
 
 int Ui::showMultipleChoice(const std::string &message, const std::vector<std::string> &answers) const {
@@ -90,5 +109,29 @@ void Ui::clearScreen() const {
 		}
 	}
 #endif
+}
+
+void Ui::appendDelimiter(std::string & result, const GameField &gameField, Coordinate const & coordinate) const
+{
+	if (coordinate.y() != 0) {
+		if (gameField.isOpenBelowCoordinate(coordinate)) {
+			result.append(delimiter_y_open);
+		} else {
+			result.append(delimiter_y_closed);
+		}
+	}
+	result.append(" ");
+}
+
+void Ui::appendContent(std::string & result, const GameField &gameField, Coordinate const & coordinate) const
+{
+	if (coordinate.x() != 0) {
+		if (gameField.isOpenLeftOfCoordinate(coordinate)) {
+			result.append(delimiter_x_open);
+		} else {
+			result.append(delimiter_x_closed);
+		}
+	}
+	result.append(gameField.getPosition(coordinate).toString());
 }
 
