@@ -16,16 +16,16 @@ enum Direction {
 
 class MovePlayerDecision : public GameDecision {
 public:
-	MovePlayerDecision(std::shared_ptr<const Player> player, Direction direction);
+	MovePlayerDecision(Direction direction);
 
-	bool isValidMove(std::shared_ptr<const GameField> gameField) const override;
-	void executeMove(std::shared_ptr<GameField> gameField) override;
+	bool isValidMove(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const override;
+	void executeMove(std::shared_ptr<Player> player, std::shared_ptr<GameField> gameField) override;
 
 private:
 	Direction direction;
-	bool isBorderInTheWay(std::shared_ptr<const GameField> gameField) const;
-	bool isOutOfGameField(std::shared_ptr<const GameField> gameField) const;
-	bool isOtherPlayerInTheWay(std::shared_ptr<const GameField> gameField) const;
+	bool isBorderInTheWay(std::shared_ptr<Player> player, std::shared_ptr<const GameField> gameField) const;
+	bool isOutOfGameField(std::shared_ptr<Player> player, std::shared_ptr<const GameField> gameField) const;
+	bool isOtherPlayerInTheWay(std::shared_ptr<Player> player, std::shared_ptr<const GameField> gameField) const;
 };
 
 

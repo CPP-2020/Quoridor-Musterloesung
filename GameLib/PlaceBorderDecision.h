@@ -16,12 +16,11 @@ enum class BorderOrientation
 class PlaceBorderDecision : public GameDecision
 {
   public:
-    PlaceBorderDecision(const std::shared_ptr<const Player> player,
-                        const BorderOrientation &orientation,
+    PlaceBorderDecision(const BorderOrientation &orientation,
                         const Coordinate &topLeftCoordinate);
 
-    bool isValidMove(std::shared_ptr<const GameField> gameField) const override;
-    void executeMove(std::shared_ptr<GameField> gameField) override;
+    bool isValidMove(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField) const override;
+    void executeMove(std::shared_ptr<Player> player, std::shared_ptr<GameField> gameField) override;
 
   private:
     BorderOrientation orientation;

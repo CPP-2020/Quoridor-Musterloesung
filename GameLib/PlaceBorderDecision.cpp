@@ -6,16 +6,15 @@
 #include "Player.h"
 #include <assert.h>
 
-PlaceBorderDecision::PlaceBorderDecision(const std::shared_ptr<const Player> player,
-                                         const BorderOrientation &orientation,
+PlaceBorderDecision::PlaceBorderDecision(const BorderOrientation &orientation,
                                          const Coordinate &topLeftCoordinate)
-        : GameDecision(player)
-        , topLeftCoordinate(topLeftCoordinate)
+        : topLeftCoordinate(topLeftCoordinate)
         , orientation(orientation)
 {
 }
 
-bool PlaceBorderDecision::isValidMove(std::shared_ptr<const GameField> gameField) const
+bool PlaceBorderDecision::isValidMove(std::shared_ptr<const Player> player,
+                                      std::shared_ptr<const GameField> gameField) const
 {
     if (player->getRemainingBorders() <= 0)
     {
@@ -41,9 +40,10 @@ bool PlaceBorderDecision::isValidMove(std::shared_ptr<const GameField> gameField
     return false;
 }
 
-void PlaceBorderDecision::executeMove(std::shared_ptr<GameField> gameField)
+void PlaceBorderDecision::executeMove(std::shared_ptr<Player> player,
+                                      std::shared_ptr<GameField> gameField)
 {
-    assert(isValidMove(gameField));
+    assert(isValidMove(player, gameField));
 
     auto topRightCoordinate = topLeftCoordinate.getRightCoordinate();
     auto bottomLeftCoordinate = topLeftCoordinate.getBelowCoordinate();
