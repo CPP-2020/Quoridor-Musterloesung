@@ -1,9 +1,5 @@
-#include <set>
-#include <list>
 #include "GameField.h"
-#include "Position.h"
 #include "cassert"
-#include "../Graph/Algorithm/BreadthFirstSearch.h"
 
 using Combinatorics::Graph;
 using Combinatorics::Vertex;
@@ -24,7 +20,7 @@ GameField::GameField()
             if (y != 0) {
                 m_graph.addEdge(
                         getPosition(Coordinate(x,y)).getVertex(),
-                        getPosition(Coordinate(x, y).getBelowCoordinate()).getVertex()
+                        getPosition(Coordinate(x,y).getBelowCoordinate()).getVertex()
                         );
             }
             if (x != 0) {
@@ -111,3 +107,18 @@ bool GameField::edgeBetweenCoordinatesExists(Coordinate const & a, Coordinate co
 {
     return getEdgeIdBetweenCoordinates(a, b) != Graph::INVALID_EDGE_ID;
 }
+
+std::shared_ptr< Position const> GameField::getPlayerPosition(const std::shared_ptr<const PlayerId> &playerId) const {
+    assert(m_playerPositions.find(playerId) != m_playerPositions.end());
+
+    return m_playerPositions.at(playerId);
+}
+
+void GameField::setPlayerPosition(std::shared_ptr<const PlayerId> &playerId,
+                                  std::shared_ptr<Position const> position) {
+  m_playerPositions[playerId] = position;
+}
+
+int GameField::getHeight() const { return s_height; }
+
+int GameField::getWidth() const { return s_width; }

@@ -2,11 +2,13 @@
 
 #include "Position.h"
 #include "../Graph/Graph.h"
+#include "PlayerId.h"
 
 #include <array>
 #include <memory>
 #include <string>
 #include <list>
+#include <map>
 
 class GameField {
 public:
@@ -16,7 +18,14 @@ public:
 
     const Position & getPosition(Coordinate const & coordinates) const;
 
+    std::shared_ptr<Position const> getPlayerPosition(std::shared_ptr<PlayerId const> const &playerId) const;
+
+    void setPlayerPosition(std::shared_ptr<PlayerId const> &playerId, std::shared_ptr<Position const> position);
+
+    int getWidth() const;
+    int getHeight() const;
 private:
+    std::map<std::shared_ptr<PlayerId const>, std::shared_ptr<Position const>> m_playerPositions;
 
     Position & getPosition(Coordinate const & coordinates);
     // Returns corresponding EdgeId and Graph::INVALID_EDGE_ID if edge is already removed
@@ -33,5 +42,6 @@ private:
     void printDelimiter(std::string & result, Coordinate const & coordinate) const;
     void printContent(std::string & result, Coordinate const & coordinate) const;
     std::array<std::array<std::unique_ptr<Position>, s_height>, s_width> m_field;
-    const Position & at(int x, int y) const;
+
+    const Position &at(int x, int y) const;
 };
