@@ -32,12 +32,14 @@ void GameHost::startGame()
 
         bool decisionValid = false;
 
-        while(!decisionValid){
+        while (!decisionValid)
+        {
             auto gameDecision = currentPlayer->getGameDecision(gameField);
 
             decisionValid = gameDecision->isValidMove(currentPlayer->getPlayerData(), gameField);
 
-            if(decisionValid){
+            if (decisionValid)
+            {
                 gameDecision->executeMove(currentPlayer->getPlayerData(), gameField);
             }
         }
@@ -62,7 +64,9 @@ void GameHost::placePlayersOnField() const
 
     gameField->setPlayerPosition(players[0]->getPlayerData(),
                                  std::make_shared<Coordinate>(0, height / 2));
+    players[0]->getPlayerData()->setStartSide(BoardSides::Left);
 
     gameField->setPlayerPosition(players[1]->getPlayerData(),
                                  std::make_shared<Coordinate>(width - 1, height / 2));
+    players[1]->getPlayerData()->setStartSide(BoardSides::Right);
 }

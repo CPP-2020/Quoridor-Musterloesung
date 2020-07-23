@@ -35,3 +35,7 @@ void PlayerData::setRemainingBorders(int borders)
 {
     remainingBorders = borders;
 }
+void PlayerData::setStartSide(BoardSides boardSide)
+{
+    startSide = boardSide;
+}

@@ -16,6 +16,7 @@ class PlayerData
     int getID() const;
     std::string getName() const;
     BoardSides getStartSide() const;
+    void setStartSide(BoardSides boardSide);
 
     int getRemainingBorders() const;
     void setRemainingBorders(int borders);
