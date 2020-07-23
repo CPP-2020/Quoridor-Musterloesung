@@ -60,13 +60,13 @@ void Ui::appendDelimiter(std::string & result, std::shared_ptr<const GameField> 
 			{
 				result.append(first_delimiter_y_closed);
 			}
-			else if(gameField->getWidth()-1)
+            else if (coordinate.x() == gameField->getWidth() - 1)
 			{
 				result.append(last_delimiter_y_closed);
 			}
 			else
 			{
-				result.append(delimiter_y_closed);
+                result.append(delimiter_y_closed);
 			}
 		}
 	}
