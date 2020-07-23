@@ -13,6 +13,7 @@ add_executable(
     testcases/gamelib_tests.cpp 
     testcases/GameRules_tests.cpp 
     testcases/PlaceBorderDecision_test.cpp
-    testcases/MovePlayerDecision_test.cpp)
+    testcases/MovePlayerDecision_test.cpp
+    testcases/Ui_test.cpp)
 
 target_link_libraries(Google_Tests_run gtest gtest_main GraphLib LoggerLib GameLib)
