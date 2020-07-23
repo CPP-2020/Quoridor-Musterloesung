@@ -9,7 +9,6 @@
 #include <string>
 #include "GameDecision.h"
 #include "GameField.h"
-#include "PlayerId.h"
 #include <memory>
 
 class Player {
@@ -22,8 +21,6 @@ public:
 	void setId(int newId);
 
 	virtual GameDecision getGameDecision(std::shared_ptr<const GameField> gameField) = 0;
-
-    std::shared_ptr<PlayerId> playerData;
 
 private:
 	std::string name;

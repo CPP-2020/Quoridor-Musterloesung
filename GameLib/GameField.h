@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Position.h"
 #include "../Graph/Graph.h"
-#include "PlayerId.h"
+#include "Player.h"
+#include "Position.h"
 
 #include <array>
-#include <memory>
-#include <string>
 #include <list>
 #include <map>
+#include <memory>
+#include <string>
 
 class GameField {
 public:
@@ -21,12 +21,12 @@ public:
 	bool isOpenBelowCoordinate(Coordinate const & coordinate) const;
 	bool isOpenLeftOfCoordinate(Coordinate const & coordinate) const;
 
-    std::shared_ptr<Position const> getPlayerPosition(std::shared_ptr<PlayerId const> const &playerId) const;
+    std::shared_ptr<Position const> getPlayerPosition(std::shared_ptr<Player const> const &player) const;
 
-    void setPlayerPosition(std::shared_ptr<PlayerId const> &playerId, std::shared_ptr<Position const> position);
+    void setPlayerPosition(std::shared_ptr<Player const> &player, std::shared_ptr<Position const> position);
 
 private:
-    std::map<std::shared_ptr<PlayerId const>, std::shared_ptr<Position const>> m_playerPositions;
+    std::map<std::shared_ptr<Player const>, std::shared_ptr<Position const>> m_playerPositions;
 
     Position & getPosition(Coordinate const & coordinates);
     // Returns corresponding EdgeId and Graph::INVALID_EDGE_ID if edge is already removed
