@@ -5,7 +5,7 @@
 #ifndef HACKATHON_GAMEDECISION_H
 #define HACKATHON_GAMEDECISION_H
 
-#include "GameField.h"
+#include <memory>
 
 class Player;
 class GameField;

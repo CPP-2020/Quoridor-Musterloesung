@@ -3,6 +3,8 @@
 //
 
 #include "MovePlayerDecision.h"
+#include "Position.h"
+#include "GameField.h"
 
 MovePlayerDecision::MovePlayerDecision(std::shared_ptr<const Player> player, Direction direction)
 	: GameDecision(player), direction(direction)
@@ -28,7 +30,14 @@ bool MovePlayerDecision::isBorderInTheWay(std::shared_ptr<const GameField> gameF
 	// x Where the player currently is (coordinates), --> Public GameField method
 	// Where the next coordinate in the specified direction is --> Public coordinate method
 	// x Wether there is an edge between these coordinates --> Private GameField method
-	//gameField->getPlayerPosition(player)
+//	Coordinate currentPlayerCoordinate = gameField->getPlayerPosition(player);
+//	Coordinate nextPlayerCoordinate();
+//	switch (direction) {
+//		case Direction::Up:
+//			nextPlayerPosition = currentPlayerPosition->getAboveCoordinate();
+
+//	}
+//	return gameField->borderBetweenCoordinates(currentPlayerPosition, currentPlayerPosition.)
 }
 
 bool MovePlayerDecision::isOutOfGameField(std::shared_ptr<const GameField> gameField) const
