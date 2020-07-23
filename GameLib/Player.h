@@ -14,11 +14,20 @@
 
 class Player {
 public:
-    Player(std::shared_ptr<PlayerId> &newPlayerData);
-    virtual std::string getPlayerName() = 0;
-    virtual GameDecision getGameDecision(const GameField& gameField) = 0;
+	Player(const std::string &name, const int &id);
+
+	std::string getName() const;
+	int getID() const;
+	void setName(std::string newName);
+	void setId(int newId);
+
+	virtual GameDecision getGameDecision(std::shared_ptr<const GameField> gameField) = 0;
 
     std::shared_ptr<PlayerId> playerData;
+
+private:
+	std::string name;
+	int id;
 };
 
 
