@@ -4,14 +4,39 @@
 
 #include "MovePlayerDecision.h"
 
-MovePlayerDecision::MovePlayerDecision(Direction direction) {
+MovePlayerDecision::MovePlayerDecision(std::shared_ptr<const Player> player, Direction direction)
+	: GameDecision(player), direction(direction)
+{
 
 }
 
-bool MovePlayerDecision::isValidMove(const GameField &gameField) {
-    return false;
+bool MovePlayerDecision::isValidMove(std::shared_ptr<const GameField> gameField) const
+{
+	return !isBorderInTheWay(gameField) &&
+		   !isOutOfGameField(gameField) &&
+		   !isOtherPlayerInTheWay(gameField);
 }
 
-void MovePlayerDecision::executeMove(GameField &gameField) {
+void MovePlayerDecision::executeMove(std::shared_ptr<const GameField> gameField)
+{
+
+}
+
+bool MovePlayerDecision::isBorderInTheWay(std::shared_ptr<const GameField> gameField) const
+{
+	// What the current player is --> ?
+	// x Where the player currently is (coordinates), --> Public GameField method
+	// Where the next coordinate in the specified direction is --> Public coordinate method
+	// x Wether there is an edge between these coordinates --> Private GameField method
+	//gameField->getPlayerPosition(player)
+}
+
+bool MovePlayerDecision::isOutOfGameField(std::shared_ptr<const GameField> gameField) const
+{
+
+}
+
+bool MovePlayerDecision::isOtherPlayerInTheWay(std::shared_ptr<const GameField> gameField) const
+{
 
 }

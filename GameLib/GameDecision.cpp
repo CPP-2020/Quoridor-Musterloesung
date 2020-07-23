@@ -3,3 +3,8 @@
 //
 
 #include "GameDecision.h"
+
+GameDecision::GameDecision(std::shared_ptr<const Player> player) : player(player)
+{
+
+}
