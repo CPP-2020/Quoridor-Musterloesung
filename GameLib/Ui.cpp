@@ -88,6 +88,11 @@ void Ui::showWinnerMessage(std::shared_ptr<const PlayerData> player) const {
 	std::cout << "Player " << player->getName() << " has won! Congrats!" << std::endl;
 }
 
+void Ui::showMessage(const std::string &message) const
+{
+	std::cout << message << std::endl;
+}
+
 int Ui::showMultipleChoice(const std::string &message, const std::vector<std::string> &answers) const {
 	int result;
 
