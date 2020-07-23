@@ -22,7 +22,6 @@ void GameHost::startGame()
 	while (true)  //Zeit für ein D D D D DUELL
 	{
 		const auto currentPlayer = players[currentPlayerIndex];
-		const auto nextPlayerIndex = (currentPlayerIndex + 1) %2;
 
 		//currentPlayer->getGameDecision(gameField);
 
