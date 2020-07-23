@@ -1,5 +1,4 @@
 #include "HumanPlayer.h"
-#include "Coordinate.h"
 #include "MovePlayerDecision.h"
 #include "PlaceBorderDecision.h"
 #include "Ui.h"
@@ -8,12 +7,10 @@
 // Created by bened on 23.07.2020.
 //
 
-HumanPlayer::HumanPlayer(const std::string &name,
-                         const int &id,
-                         const BoardSides &startSide,
+HumanPlayer::HumanPlayer(std::shared_ptr<PlayerData> playerData,
                          std::shared_ptr<Ui> ui)
-        : Player(name, id, startSide)
-        , ui(ui)
+    : Player(playerData)
+    , ui(ui)
 {
 }
 
@@ -34,7 +31,6 @@ std::shared_ptr<GameDecision> HumanPlayer::getGameDecision(
 
     return nullptr;
 }
-
 std::shared_ptr<GameDecision> HumanPlayer::getMoveDecision(
     std::shared_ptr<GameField const> gameField)
 {
@@ -66,7 +62,7 @@ std::shared_ptr<GameDecision> HumanPlayer::getMoveDecision(
         }
 
         auto moveDecision = std::make_shared<MovePlayerDecision>(moveDirection);
-        if (moveDecision->isValidMove(shared_from_this(), gameField))
+        if (moveDecision->isValidMove(playerData, gameField))
         {
             return moveDecision;
         }
@@ -75,7 +71,6 @@ std::shared_ptr<GameDecision> HumanPlayer::getMoveDecision(
                                       {"Up", "Down", "Left", "Right"});
     }
 }
-
 std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
     std::shared_ptr<GameField const> gameField)
 {
@@ -122,7 +117,7 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
             auto borderDesicion =
                 std::make_shared<PlaceBorderDecision>(borderOrientation, *coordinate);
 
-            if (borderDesicion->isValidMove(shared_from_this(), gameField))
+            if (borderDesicion->isValidMove(playerData, gameField))
             {
                 return borderDesicion;
             }

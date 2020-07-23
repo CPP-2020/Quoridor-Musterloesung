@@ -42,7 +42,7 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const {
 	std::cout << result << std::endl;
 }
 
-void Ui::showWinnerMessage(std::shared_ptr<const Player> player) const {
+void Ui::showWinnerMessage(std::shared_ptr<const PlayerData> player) const {
 	std::cout << "Player " << player->getName() << " has won! Congrats!" << std::endl;
 }
 

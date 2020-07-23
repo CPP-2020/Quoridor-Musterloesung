@@ -13,7 +13,7 @@ PlaceBorderDecision::PlaceBorderDecision(const BorderOrientation &orientation,
 {
 }
 
-bool PlaceBorderDecision::isValidMove(std::shared_ptr<const Player> player,
+bool PlaceBorderDecision::isValidMove(std::shared_ptr<const PlayerData> player,
                                       std::shared_ptr<const GameField> gameField) const
 {
     if (player->getRemainingBorders() <= 0)
@@ -51,7 +51,7 @@ bool PlaceBorderDecision::isValidMove(std::shared_ptr<const Player> player,
     return false;
 }
 
-void PlaceBorderDecision::executeMove(std::shared_ptr<Player> player,
+void PlaceBorderDecision::executeMove(std::shared_ptr<PlayerData> player,
                                       std::shared_ptr<GameField> gameField)
 {
     assert(isValidMove(player, gameField));

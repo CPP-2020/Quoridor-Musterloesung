@@ -99,13 +99,13 @@ void GameField::setBorderBetweenCoordinates(const Coordinate &a, const Coordinat
 }
 
 std::shared_ptr<Coordinate const> GameField::getPlayerPosition(
-    const std::shared_ptr<const Player> &player) const
+    const std::shared_ptr<const PlayerData> &player) const
 {
     assert(m_playerPositions.find(player) != m_playerPositions.end());
 
     return m_playerPositions.at(player);
 }
-void GameField::setPlayerPosition(std::shared_ptr<const Player> player,
+void GameField::setPlayerPosition(std::shared_ptr<const PlayerData> player,
                                   std::shared_ptr<const Coordinate> position)
 {
     m_playerPositions[player] = position;

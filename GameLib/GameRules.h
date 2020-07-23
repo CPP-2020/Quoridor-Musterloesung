@@ -5,6 +5,7 @@
 #ifndef HACKATHON_GAMERULES_H
 #define HACKATHON_GAMERULES_H
 
+#include "PlayerData.h"
 #include <memory>
 
 class Player;
@@ -12,7 +13,7 @@ class GameField;
 
 class GameRules {
 public:
-	bool didPlayerWin(std::shared_ptr<const Player> player, std::shared_ptr<const GameField> gameField);
+	bool didPlayerWin(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField);
 };
 
 

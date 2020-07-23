@@ -15,8 +15,7 @@
 class DummyPlayer : public Player
 {
   public:
-    DummyPlayer(const std::string &name, const int &id, const BoardSides &boardSides);
-
+    DummyPlayer(const std::shared_ptr<PlayerData> &playerData);
     std::shared_ptr<GameDecision> getGameDecision(
         std::shared_ptr<const GameField> gameField) override;
 };

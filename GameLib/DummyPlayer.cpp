@@ -3,13 +3,13 @@
 //
 
 #include "DummyPlayer.h"
+DummyPlayer::DummyPlayer(const std::shared_ptr<PlayerData> &playerData)
+    : Player(playerData)
+{
+}
+
 std::shared_ptr<GameDecision> DummyPlayer::getGameDecision(
     std::shared_ptr<const GameField> gameField)
 {
     return std::make_shared<MovePlayerDecision>(Direction::Down);
-}
-
-DummyPlayer::DummyPlayer(const std::string &name, const int &id, const BoardSides &boardSides)
-        : Player(name, id, boardSides)
-{
 }

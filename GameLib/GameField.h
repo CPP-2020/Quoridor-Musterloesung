@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef HACKATHON_GAMEFIELD_H
+#define HACKATHON_GAMEFIELD_H
 
 #include "../Graph/Graph.h"
 #include "Position.h"
@@ -9,7 +11,7 @@
 #include <memory>
 #include <string>
 
-class Player;
+class PlayerData;
 
 enum class BoardSides
 {
@@ -32,14 +34,14 @@ class GameField
     bool isOpenLeftOfCoordinate(Coordinate const &coordinate) const;
     bool isValidCoordinate(Coordinate const &coordinate) const;
 
-    std::shared_ptr<Coordinate const> getPlayerPosition(std::shared_ptr<Player const> const &player) const;
-    void setPlayerPosition(std::shared_ptr<Player const> player, std::shared_ptr<Coordinate const> position);
+    std::shared_ptr<Coordinate const> getPlayerPosition(std::shared_ptr<PlayerData const> const &player) const;
+    void setPlayerPosition(std::shared_ptr<PlayerData const> player, std::shared_ptr<Coordinate const> position);
 
     bool noBorderBetweenCoordinates(Coordinate const &a, Coordinate const &b) const;
     void setBorderBetweenCoordinates(Coordinate const &a, Coordinate const &b);
 
   private:
-    std::map<std::shared_ptr<Player const>, std::shared_ptr<Coordinate const>> m_playerPositions;
+    std::map<std::shared_ptr<PlayerData const>, std::shared_ptr<Coordinate const>> m_playerPositions;
 
     Position &getPosition(Coordinate const &coordinates);
     // Returns corresponding EdgeId and Graph::INVALID_EDGE_ID if edge is already removed
@@ -58,3 +60,5 @@ class GameField
 
     const Position &at(int x, int y) const;
 };
+
+#endif
