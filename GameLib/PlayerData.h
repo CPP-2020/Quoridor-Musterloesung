@@ -21,6 +21,8 @@ class PlayerData
     int getRemainingBorders() const;
     void setRemainingBorders(int borders);
 
+	bool operator==(const PlayerData &other);
+
   private:
     std::string name;
     int id;

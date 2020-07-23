@@ -33,8 +33,14 @@ int PlayerData::getRemainingBorders() const
 }
 void PlayerData::setRemainingBorders(int borders)
 {
-    remainingBorders = borders;
+	remainingBorders = borders;
 }
+
+bool PlayerData::operator==(const PlayerData &other)
+{
+	return id == other.id;
+}
+
 void PlayerData::setStartSide(BoardSides boardSide)
 {
     startSide = boardSide;

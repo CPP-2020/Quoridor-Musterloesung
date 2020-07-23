@@ -103,8 +103,18 @@ std::shared_ptr<Coordinate const> GameField::getPlayerPosition(
 {
     assert(m_playerPositions.find(player) != m_playerPositions.end());
 
-    return m_playerPositions.at(player);
+	return m_playerPositions.at(player);
 }
+
+bool GameField::isOtherPlayerAtPosition(const std::shared_ptr<const PlayerData> &thisPlayer, const Coordinate &coordinate) const
+{
+	return std::any_of(m_playerPositions.begin(), m_playerPositions.end(),
+					   [thisPlayer, coordinate] (auto const& x)
+						{
+							return x.first != thisPlayer && *x.second == coordinate;
+						});
+}
+
 void GameField::setPlayerPosition(std::shared_ptr<const PlayerData> player,
                                   std::shared_ptr<const Coordinate> position)
 {

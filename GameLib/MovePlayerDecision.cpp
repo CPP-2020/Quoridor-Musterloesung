@@ -15,16 +15,24 @@ MovePlayerDecision::MovePlayerDecision(Direction direction)
 bool MovePlayerDecision::isValidMove(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
 {
 	return !isBorderInTheWay(player, gameField) &&
-		   !isOutOfGameField(player, gameField) &&
-		   !isOtherPlayerInTheWay(player, gameField);
+		   !isOutOfGameField(player, gameField);
 }
 
 void MovePlayerDecision::executeMove(std::shared_ptr<PlayerData> player, std::shared_ptr<GameField> gameField)
 {
-
+	if(isOtherPlayerInTheWay(player, gameField))
+	{
+		// We let the player "walk" two times in the same direction
+		gameField->setPlayerPosition(player, getNextPlayerCoordinate(player, gameField));
+		gameField->setPlayerPosition(player, getNextPlayerCoordinate(player, gameField));
+	}
+	else
+	{
+		gameField->setPlayerPosition(player, getNextPlayerCoordinate(player, gameField));
+	}
 }
 
-bool MovePlayerDecision::isBorderInTheWay(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
+std::shared_ptr<const Coordinate> MovePlayerDecision::getNextPlayerCoordinate(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
 {
 	auto currentPlayerCoordinate = gameField->getPlayerPosition(player);
 	std::shared_ptr<const Coordinate> nextPlayerCoordinate;
@@ -42,16 +50,21 @@ bool MovePlayerDecision::isBorderInTheWay(std::shared_ptr<const PlayerData> play
 			nextPlayerCoordinate = std::make_shared<const Coordinate>(currentPlayerCoordinate->getRightCoordinate());
 			break;
 	}
-	return !gameField->noBorderBetweenCoordinates(*currentPlayerCoordinate, *nextPlayerCoordinate);
+	return nextPlayerCoordinate;
+}
+
+bool MovePlayerDecision::isBorderInTheWay(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
+{
+	auto currentPlayerCoordinate = gameField->getPlayerPosition(player);
+	return !gameField->noBorderBetweenCoordinates(*currentPlayerCoordinate, *getNextPlayerCoordinate(player, gameField));
 }
 
 bool MovePlayerDecision::isOutOfGameField(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
 {
-
-    return false;
+	return !gameField->isValidCoordinate(*getNextPlayerCoordinate(player, gameField));
 }
 
 bool MovePlayerDecision::isOtherPlayerInTheWay(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
 {
-    return false;
+	return gameField->isOtherPlayerAtPosition(player, *getNextPlayerCoordinate(player, gameField));
 }
