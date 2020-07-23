@@ -24,7 +24,7 @@ void GameHost::startGame()
 		const auto currentPlayer = players[currentPlayerIndex];
 		const auto nextPlayerIndex = (currentPlayerIndex + 1) %2;
 
-		currentPlayer->getGameDecision(gameField);
+		//currentPlayer->getGameDecision(gameField);
 
 		ui->drawGame(gameField);
 
