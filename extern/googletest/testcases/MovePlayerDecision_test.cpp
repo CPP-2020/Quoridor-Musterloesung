@@ -13,8 +13,6 @@ TEST(MovePlayerDecisionTest, When_MakeInvalidMoveToRight_Assert_isValidMoveRetur
 
 	gameField->setPlayerPosition(player, std::make_shared<Coordinate>(0, 0));
 	gameField->setBorderBetweenCoordinates({0, 0}, {1, 0});
-	gameField->setBorderBetweenCoordinates({0, 0}, {0, 1});
-	gameField->setBorderBetweenCoordinates({1, 0}, {1, 1});
 
 	MovePlayerDecision decision(Direction::Right);
 
