@@ -1,4 +1,5 @@
 #include "GameField.h"
+#include "GameField.h"
 #include "cassert"
 
 using Combinatorics::Edge;
@@ -56,6 +57,7 @@ bool GameField::isOpenLeftOfCoordinate(const Coordinate &coordinate) const
     return m_graph.hasEdge(getPosition(coordinate).getVertex(),
                            getPosition(coordinate.getLeftCoordinate()).getVertex());
 }
+
 
 Position &GameField::getPosition(Coordinate const &coordinate)
 {
