@@ -18,7 +18,7 @@ public:
     virtual void executeMove(std::shared_ptr<GameField> gameField) = 0;
 
 protected:
-	std::shared_ptr<const Player> player;
+	std::shared_ptr<Player> player;
 };
 
 

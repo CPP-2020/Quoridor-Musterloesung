@@ -67,7 +67,7 @@ Combinatorics::EdgeId GameField::getEdgeIdBetweenCoordinates(Coordinate const & 
 
 Combinatorics::Edge const & GameField::getEdgeBetweenCoordinates(Coordinate const & a, Coordinate const & b) const
 {
-	assert(!borderBetweenCoordinates(a,b));
+	assert(!noBorderBetweenCoordinates(a, b));
     return m_graph.getEdge(getEdgeIdBetweenCoordinates(a,b));
 }
 
@@ -76,9 +76,18 @@ Combinatorics::Edge & GameField::getEdgeBetweenCoordinates(Coordinate const & a,
     return const_cast<Combinatorics::Edge &>(static_cast<GameField const *>(this)->getEdgeBetweenCoordinates(a,b));
 }
 
-bool GameField::borderBetweenCoordinates(Coordinate const & a, Coordinate const & b) const
+bool GameField::noBorderBetweenCoordinates(Coordinate const & a, Coordinate const & b) const
 {
     return getEdgeIdBetweenCoordinates(a, b) != Graph::INVALID_EDGE_ID;
+}
+
+void GameField::setBorderBetweenCoordinates(const Coordinate &a, const Coordinate &b)
+{
+    auto edge = getEdgeIdBetweenCoordinates(a, b);
+
+    if(edge == Graph::INVALID_EDGE_ID) return;
+    
+    m_graph.removeEdge(edge);
 }
 
 std::shared_ptr<Coordinate const> GameField::getPlayerPosition(const std::shared_ptr<const Player> &player) const {
