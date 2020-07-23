@@ -29,6 +29,8 @@ public:
 	bool isOpenBelowCoordinate(Coordinate const & coordinate) const;
 	bool isOpenLeftOfCoordinate(Coordinate const & coordinate) const;
 
+    bool isValidCoordinate(const Coordinate coordinate) const;
+
     std::shared_ptr<Coordinate const> getPlayerPosition(std::shared_ptr<Player const> const &player) const;
     void setPlayerPosition(std::shared_ptr<Player const> &player, std::shared_ptr<Coordinate const> position);
 
