@@ -7,10 +7,9 @@
 // Created by bened on 23.07.2020.
 //
 
-HumanPlayer::HumanPlayer(std::shared_ptr<PlayerData> playerData,
-                         std::shared_ptr<Ui> ui)
-    : Player(playerData)
-    , ui(ui)
+HumanPlayer::HumanPlayer(std::shared_ptr<PlayerData> playerData, std::shared_ptr<Ui> ui)
+        : Player(playerData)
+        , ui(ui)
 {
 }
 
@@ -91,17 +90,17 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
         borderOrientation = BorderOrientation::Horizontal;
     }
 
-    int XborderPlacement = ui->showMultipleChoice(
-        "Where would you like to place the border (x value)?", {"1", "2", "3", "4", "5", "6", "7"});
+    int XborderPlacement =
+        ui->showMultipleChoice("Where would you like to place the border (x value)?",
+                               {"1", "2", "3", "4", "5", "6", "7", "8"});
 
-    int YborderPlacement = ui->showMultipleChoice(
-        "Where would you like to place the border (y value)?", {"1", "2", "3", "4", "5", "6", "7"});
-
-
+    int YborderPlacement =
+        ui->showMultipleChoice("Where would you like to place the border (y value)?",
+                               {"1", "2", "3", "4", "5", "6", "7", "8"});
 
     while (1)
     {
-        coordinate = new Coordinate(XborderPlacement, YborderPlacement);
+        coordinate = new Coordinate(XborderPlacement - 1, YborderPlacement - 1);
 
         if (gameField->isValidCoordinate(*coordinate))
         {
