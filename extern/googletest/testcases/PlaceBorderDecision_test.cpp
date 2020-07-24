@@ -2,6 +2,7 @@
 // Created by bened on 23.07.2020.
 //
 
+#include "../../../GameLib/ConsoleUi.h"
 #include "../../../GameLib/DummyPlayer.h"
 #include "../../../GameLib/PlaceBorderDecision.h"
 #include "../../../GameLib/Ui.h"
@@ -80,7 +81,7 @@ TEST(PlaceBorderDecision, When_BorderCatchesPlayer_Assert_PlaceBorderIsNoValidMo
     gameField->setBorderBetweenCoordinates({3, 7}, {4, 7});
     gameField->setBorderBetweenCoordinates({3, 8}, {4, 8});
 
-    Ui().drawGame(gameField);
+    ConsoleUi().drawGame(gameField);
 
     PlaceBorderDecision placeBorderDecision(BorderOrientation::Vertical, Coordinate(3, 3));
     ASSERT_FALSE(placeBorderDecision.isValidMove(playerData, gameField));
