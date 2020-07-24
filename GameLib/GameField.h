@@ -37,6 +37,7 @@ class GameField
     std::vector<std::shared_ptr<const PlayerData>> getAllPlayersOnField() const;
 
     std::shared_ptr<Coordinate const> getPlayerPosition(std::shared_ptr<PlayerData const> const &player) const;
+	bool isOtherPlayerAtPosition(std::shared_ptr<PlayerData const> const &thisPlayer, Coordinate const &coordinate) const;
     void setPlayerPosition(std::shared_ptr<PlayerData const> player, std::shared_ptr<Coordinate const> position);
 
     bool noBorderBetweenCoordinates(Coordinate const &a, Coordinate const &b) const;
