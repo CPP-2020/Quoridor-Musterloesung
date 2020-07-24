@@ -9,7 +9,7 @@
 
 TEST(UiTest, PleaseDrawABeautifulGameField)
 {
-	auto gameField = std::make_shared<GameField>();
+	auto gameField = std::make_shared<GameField>(9, 9);
     auto playerData = std::make_shared<PlayerData>("Dummy", 0, BoardSides::Right);
 	gameField->setPlayerPosition(playerData, std::make_shared<Coordinate>(0, 0));
 

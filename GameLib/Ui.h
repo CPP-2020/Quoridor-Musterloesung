@@ -10,8 +10,6 @@
 #include <string>
 #include <vector>
 
-
-
 class Ui
 {
   public:
@@ -21,8 +19,8 @@ class Ui
     virtual int showMultipleChoice(const std::string &message,
                                    const std::vector<std::string> &answers) const = 0;
     virtual int showMultipleIntChoice(const std::string &message,
-                                      const int minValue,
-                                      const int maxValue) const = 0;
+                                      int minValue,
+                                      int maxValue) const = 0;
 };
 
 #endif // HACKATHON_UI_H

@@ -42,7 +42,7 @@ void ConsoleUi::showMessage(const std::string &message) const
 }
 
 int ConsoleUi::showMultipleChoice(const std::string &message,
-                           const std::vector<std::string> &answers) const
+                                  const std::vector<std::string> &answers) const
 {
     int result;
 
@@ -66,7 +66,6 @@ int ConsoleUi::showMultipleChoice(const std::string &message,
 
     return result;
 }
-
 
 std::vector<std::vector<GamePrintTile>> ConsoleUi::buildOutputBuffer(
     const std::shared_ptr<const GameField> &gameField) const
@@ -94,7 +93,7 @@ std::vector<std::vector<GamePrintTile>> ConsoleUi::buildOutputBuffer(
 }
 
 void ConsoleUi::drawGameRowColumnNumbers(std::shared_ptr<const GameField> gameField,
-                                  std::vector<std::vector<GamePrintTile>> &output) const
+                                         std::vector<std::vector<GamePrintTile>> &output) const
 {
     // Draw the row indices
     for (int y = 0; y < gameField->getHeight() - 1; y++)
@@ -110,7 +109,7 @@ void ConsoleUi::drawGameRowColumnNumbers(std::shared_ptr<const GameField> gameFi
 }
 
 void ConsoleUi::drawGameGrid(const std::shared_ptr<const GameField> &gameField,
-                      std::vector<std::vector<GamePrintTile>> &output) const
+                             std::vector<std::vector<GamePrintTile>> &output) const
 {
     // Draw the +
     for (int y = 0; y < gameField->getHeight() + 1; y++)
@@ -123,7 +122,7 @@ void ConsoleUi::drawGameGrid(const std::shared_ptr<const GameField> &gameField,
 }
 
 void ConsoleUi::drawGamePlayers(const std::shared_ptr<const GameField> &gameField,
-                         std::vector<std::vector<GamePrintTile>> &output) const
+                                std::vector<std::vector<GamePrintTile>> &output) const
 {
     for (const auto &p: gameField->getAllPlayersOnField())
     {
@@ -138,7 +137,7 @@ void ConsoleUi::drawGamePlayers(const std::shared_ptr<const GameField> &gameFiel
 }
 
 void ConsoleUi::drawGameHorizontalBorders(const std::shared_ptr<const GameField> &gameField,
-                                   std::vector<std::vector<GamePrintTile>> &output) const
+                                          std::vector<std::vector<GamePrintTile>> &output) const
 {
     // Color the horizontal borders
     for (int y = 0; y < gameField->getHeight() - 1; y++)
@@ -164,7 +163,7 @@ void ConsoleUi::drawGameHorizontalBorders(const std::shared_ptr<const GameField>
 }
 
 void ConsoleUi::drawGameVerticalBorders(const std::shared_ptr<const GameField> &gameField,
-                                 std::vector<std::vector<GamePrintTile>> &output) const
+                                        std::vector<std::vector<GamePrintTile>> &output) const
 {
     for (int y = 0; y < gameField->getHeight(); y++)
     {
@@ -328,22 +327,18 @@ void GamePrintTile::print()
 }
 #endif
 
-int ConsoleUi::showMultipleIntChoice(const std::string &message, const int minValue,
+int ConsoleUi::showMultipleIntChoice(const std::string &message,
+                              const int minValue,
                               const int maxValue) const
 {
     int result;
 
     std::cout << message << std::endl;
 
-    for (int i = minValue; i < maxValue; i++)
-    {
-        std::cout << i + 1 << ": " << i << std::endl;
-    }
-
     std::cout << "Answer: ";
     std::cin >> result;
 
-    while (std::cin.fail() || result > maxValue || result < 1)
+    while (std::cin.fail() || result > maxValue || result < minValue)
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

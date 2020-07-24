@@ -24,11 +24,12 @@ enum class BoardSides
 class GameField
 {
   public:
-    GameField();
+    GameField(int heigth, int width);
     virtual ~GameField();
 
     int getHeight() const;
     int getWidth() const;
+
     const Position &getPosition(Coordinate const &coordinates) const;
     bool isOpenBelowCoordinate(Coordinate const &coordinate) const;
     bool isOpenLeftOfCoordinate(Coordinate const &coordinate) const;
@@ -59,9 +60,9 @@ class GameField
     //////////////////
     /// Most likely you do not have to touch this
     Combinatorics::Graph m_graph;
-    static constexpr int s_width{9};
-    static constexpr int s_height{9};
-    std::array<std::array<std::unique_ptr<Position>, s_height>, s_width> m_field;
+    int s_width;
+    int s_height;
+    std::vector<std::vector<std::shared_ptr<Position>>> m_field;
 
     const Position &at(int x, int y) const;
 };

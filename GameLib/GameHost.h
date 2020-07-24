@@ -17,7 +17,7 @@ public:
 
     GameHost(std::shared_ptr<Ui> &ui, std::vector<std::shared_ptr<Player>> &players);
 
-    std::shared_ptr<Player> startGame();
+    std::shared_ptr<Player> startGame(int fieldHeight, int fieldWidth);
 
 private:
     std::shared_ptr<Ui> ui;

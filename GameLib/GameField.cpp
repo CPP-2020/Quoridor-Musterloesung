@@ -5,13 +5,25 @@ using Combinatorics::Edge;
 using Combinatorics::Graph;
 using Combinatorics::Vertex;
 
-GameField::GameField()
+GameField::GameField(int height, int width)
+        : s_height(height)
+        , s_width(width)
 {
-    for (int x = 0; x < s_width; x++)
+
+    for (int x = s_width - 1; x >= 0; x--)
     {
-        for (int y = 0; y < s_height; y++)
+        std::vector<std::shared_ptr<Position>> column;
+        for (int y = s_height - 1; y >= 0; y--)
         {
-            m_field[x][y] = std::make_unique<Position>(Coordinate(x, y), m_graph.addVertex());
+            column.push_back(std::make_shared<Position>(Coordinate(x, y), m_graph.addVertex()));
+        }
+        m_field.push_back(column);
+    }
+
+    for (int x = s_width - 1; x >= 0; x--)
+    {
+        for (int y = s_height - 1; y >= 0; y--)
+        {
             if (y != 0)
             {
                 m_graph.addEdge(getPosition(Coordinate(x, y)).getVertex(),
@@ -25,7 +37,6 @@ GameField::GameField()
         }
     }
 }
-
 GameField::~GameField()
 {
 }
@@ -101,16 +112,17 @@ std::shared_ptr<Coordinate const> GameField::getPlayerPosition(
 {
     assert(m_playerPositions.find(player) != m_playerPositions.end());
 
-	return m_playerPositions.at(player);
+    return m_playerPositions.at(player);
 }
 
-bool GameField::isOtherPlayerAtPosition(const std::shared_ptr<const PlayerData> &thisPlayer, const Coordinate &coordinate) const
+bool GameField::isOtherPlayerAtPosition(const std::shared_ptr<const PlayerData> &thisPlayer,
+                                        const Coordinate &coordinate) const
 {
-	return std::any_of(m_playerPositions.begin(), m_playerPositions.end(),
-					   [thisPlayer, coordinate] (auto const& x)
-						{
-							return x.first != thisPlayer && *x.second == coordinate;
-						});
+    return std::any_of(m_playerPositions.begin(),
+                       m_playerPositions.end(),
+                       [thisPlayer, coordinate](auto const &x) {
+                           return x.first != thisPlayer && *x.second == coordinate;
+                       });
 }
 
 void GameField::setPlayerPosition(std::shared_ptr<const PlayerData> player,
@@ -139,8 +151,7 @@ std::vector<std::shared_ptr<const PlayerData>> GameField::getAllPlayersOnField()
     return allPlayers;
 }
 
-const Combinatorics::Graph& GameField::getGraph() const
+const Combinatorics::Graph &GameField::getGraph() const
 {
     return m_graph;
 }
-
