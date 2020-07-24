@@ -188,31 +188,6 @@ int Ui::showMultipleChoice(const std::string &message,
     return result;
 }
 
-int Ui::showMultipleIntChoice(const std::string &message, const int minValue,
-    const int maxValue) const
-{
-    int result;
-
-    std::cout << message << std::endl;
-
-    for (int i = minValue; i < maxValue; i++)
-    {
-        std::cout << i + 1 << ": " << i << std::endl;
-    }
-
-    std::cout << "Answer: ";
-    std::cin >> result;
-
-    while (std::cin.fail() || result > maxValue || result < 1)
-    {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "The given answer was invalid! Please enter a new answer: ";
-        std::cin >> result;
-    }
-
-    return result;
-}
 
 void Ui::clearScreen() const
 {
@@ -354,3 +329,29 @@ void GamePrintTile::print()
     std::cout << colorCode << character << colorCodeEnd;
 }
 #endif
+
+int Ui::showMultipleIntChoice(const std::string &message, const int minValue,
+    const int maxValue) const
+{
+    int result;
+
+    std::cout << message << std::endl;
+
+    for (int i = minValue; i < maxValue; i++)
+    {
+        std::cout << i + 1 << ": " << i << std::endl;
+    }
+
+    std::cout << "Answer: ";
+    std::cin >> result;
+
+    while (std::cin.fail() || result > maxValue || result < 1)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "The given answer was invalid! Please enter a new answer: ";
+        std::cin >> result;
+    }
+
+    return result;
+}
