@@ -39,14 +39,14 @@ void startGame(std::shared_ptr<Ui> ui)
 {
     int fieldHeight, fieldWidth;
 
-   fieldWidth =  ui->showMultipleIntChoice("Please type in the field width (value between 3 and 50)", 3, 50);
-   fieldHeight =  ui->showMultipleIntChoice("Please type in the field height (value between 3 and 50)", 3, 50);
-   
-   std::vector<std::shared_ptr<Player>> players;
-   players.push_back(getPlayerByUserChoice(ui, 1));
-   players.push_back(getPlayerByUserChoice(ui, 2));
+    fieldWidth =  ui->showMultipleIntChoice("Please type in the field width (value between 3 and 50)", 3, 50);
+    fieldHeight =  ui->showMultipleIntChoice("Please type in the field height (value between 3 and 50)", 3, 50);
 
-   std::shared_ptr<GameHost> gameHost = std::make_shared<GameHost>(ui, players);
+    std::vector<std::shared_ptr<Player>> players;
+    players.push_back(getPlayerByUserChoice(ui, 1));
+    players.push_back(getPlayerByUserChoice(ui, 2));
+
+    std::shared_ptr<GameHost> gameHost = std::make_shared<GameHost>(ui, players);
     gameHost->startGame(fieldWidth, fieldHeight);
 }
 
