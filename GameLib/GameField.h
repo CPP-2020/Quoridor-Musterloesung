@@ -43,6 +43,8 @@ class GameField
     bool noBorderBetweenCoordinates(Coordinate const &a, Coordinate const &b) const;
     void setBorderBetweenCoordinates(Coordinate const &a, Coordinate const &b);
 
+    const Combinatorics::Graph& getGraph() const;
+
   private:
     std::map<std::shared_ptr<PlayerData const>, std::shared_ptr<Coordinate const>> m_playerPositions;
 

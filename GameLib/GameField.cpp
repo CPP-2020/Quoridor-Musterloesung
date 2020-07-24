@@ -138,3 +138,9 @@ std::vector<std::shared_ptr<const PlayerData>> GameField::getAllPlayersOnField()
 
     return allPlayers;
 }
+
+const Combinatorics::Graph& GameField::getGraph() const
+{
+    return m_graph;
+}
+
