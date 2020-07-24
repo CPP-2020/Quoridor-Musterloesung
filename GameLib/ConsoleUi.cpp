@@ -235,15 +235,7 @@ void ConsoleUi::clearScreen() const
     SetConsoleCursorPosition(hStdOut, homeCoords);
 
 #else
-    if (!cur_term)
-    {
-        int result;
-        setupterm(NULL, STDOUT_FILENO, &result);
-        if (result <= 0)
-        {
-            return;
-        }
-    }
+	std::cout << "\033[H\033[J" << std::endl;
 #endif
 }
 
