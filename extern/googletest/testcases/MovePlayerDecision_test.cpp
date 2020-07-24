@@ -2,7 +2,7 @@
 #include "../../../GameLib/GameField.h"
 #include "gtest/gtest.h"
 
-#include "../../../GameLib/Ui.h"
+#include "../../../GameLib/ConsoleUi.h"
 
 #include <memory>
 
@@ -109,4 +109,18 @@ TEST(MovePlayerDecisionTest, When_BorderInFrontOfOtherPlayerToJumpOver_Assert_wa
 	ASSERT_EQ(*gameField->getPlayerPosition(playingPlayer), Coordinate(3, 2));
 }
 
+TEST(MovePlayerDecisionTest, When_JumpOverGameFieldBorder_Assert_walksAlternativeDirection)
+{
+	auto gameField = std::make_shared<GameField>();
+	auto otherPlayer = std::make_shared<PlayerData>("Dummy1", 0, BoardSides::Right);
+	auto playingPlayer = std::make_shared<PlayerData>("Dummy2", 1, BoardSides::Left);
 
+	gameField->setPlayerPosition(otherPlayer, std::make_shared<Coordinate>(0, 0));
+	gameField->setPlayerPosition(playingPlayer, std::make_shared<Coordinate>(1, 0));
+
+	MovePlayerDecision decision(Direction::Left);
+
+	ASSERT_TRUE(decision.isValidMove(playingPlayer, gameField));
+	decision.executeMove(playingPlayer, gameField);
+	ASSERT_EQ(*gameField->getPlayerPosition(playingPlayer), Coordinate(0, 1));
+}
