@@ -14,8 +14,8 @@ MovePlayerDecision::MovePlayerDecision(Direction direction)
 
 bool MovePlayerDecision::isValidMove(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
 {
-	return !isBorderInTheWay(player, gameField) &&
-		   !isOutOfGameField(player, gameField);
+	return !isOutOfGameField(player, gameField) &&
+		   !isBorderInTheWay(player, gameField);
 }
 
 void MovePlayerDecision::executeMove(std::shared_ptr<PlayerData> player, std::shared_ptr<GameField> gameField)
