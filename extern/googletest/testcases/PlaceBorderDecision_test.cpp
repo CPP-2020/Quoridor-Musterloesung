@@ -73,8 +73,6 @@ TEST(PlaceBorderDecision, When_BorderCatchesPlayer_Assert_PlaceBorderIsNoValidMo
     gameField->setBorderBetweenCoordinates({3, 0}, {4, 0});
     gameField->setBorderBetweenCoordinates({3, 1}, {4, 1});
     gameField->setBorderBetweenCoordinates({3, 2}, {4, 2});
-    // gameField->setBorderBetweenCoordinates({3, 3}, {4, 3});
-    // gameField->setBorderBetweenCoordinates({3, 4}, {4, 4});
     // gameField->setBorderBetweenCoordinates({3, 3}, {0, 3}); // these are the borders which catch
     // the player gameField->setBorderBetweenCoordinates({3, 4}, {4, 4});
     gameField->setBorderBetweenCoordinates({3, 5}, {4, 5});

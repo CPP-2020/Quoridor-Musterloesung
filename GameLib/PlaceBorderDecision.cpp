@@ -86,13 +86,6 @@ bool PlaceBorderDecision::borderDoesNotCatchPlayer(std::shared_ptr<const GameFie
 {
     std::set<Combinatorics::EdgeId> edgesOfBorder = getEdgesOfBorder(gameField);
 
-    for (const auto &e: edgesOfBorder)
-    {
-        std::cout << gameField->getGraph().getEdge(e).getEndpoint1().getId() << std::endl;
-        std::cout << gameField->getGraph().getEdge(e).getEndpoint2().getId() << std::endl;
-        std::cout << e << std::endl;
-    }
-
     int columnToCheck = -1;
     if (player->getStartSide() == BoardSides::Left)
     {
@@ -113,15 +106,6 @@ bool PlaceBorderDecision::borderDoesNotCatchPlayer(std::shared_ptr<const GameFie
     for (int i = 0; i < gameField->getHeight(); i++)
     {
         isSideReachable |= bfs.is_reachable(gameField->getPosition({columnToCheck, i}).getVertex());
-        if (isSideReachable)
-        {
-            auto vertices = bfs.getPath(gameField->getPosition({columnToCheck, i}).getVertex());
-
-            for (const auto &v: vertices)
-            {
-                std::cout << v << std::endl;
-            }
-        }
     }
 
     return isSideReachable;
