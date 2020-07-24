@@ -1,10 +1,11 @@
+#include "GameLib/ConsoleUi.h"
 #include "GameLib/GameField.h"
 #include "GameLib/GameHost.h"
 #include "GameLib/HumanPlayer.h"
 #include "GameLib/Player.h"
 #include "GameLib/RandomBot.h"
-#include "GameLib/Ui.h"
 #include "GameLib/SmartBot.h"
+#include "GameLib/Ui.h"
 
 #include <memory>
 
@@ -13,7 +14,7 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
 
 int main()
 {
-    auto ui = std::make_shared<Ui>();
+    auto ui = std::make_shared<ConsoleUi>();
 
     bool exit = false;
 

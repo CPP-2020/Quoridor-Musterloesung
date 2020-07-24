@@ -10,7 +10,7 @@ GameHost::GameHost(std::shared_ptr<Ui> &ui, std::vector<std::shared_ptr<Player>>
 {
 }
 
-void GameHost::startGame(int fieldHeight, int fieldWidth)
+std::shared_ptr<Player> GameHost::startGame(int fieldHeight, int fieldWidth)
 {
     gameRules = std::make_shared<GameRules>();
     gameField = std::make_shared<GameField>(fieldWidth, fieldHeight);
@@ -51,7 +51,8 @@ void GameHost::startGame(int fieldHeight, int fieldWidth)
         if (win)
         {
             ui->showWinnerMessage(currentPlayer->getPlayerData());
-            break;
+
+            return currentPlayer;
         }
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }

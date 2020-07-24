@@ -69,7 +69,44 @@ TEST(MovePlayerDecisionTest, When_ExecuteValidMove_Assert_isPlayerAtCorrectCoord
 
 	ASSERT_TRUE(decision.isValidMove(playerData, gameField));
 	decision.executeMove(playerData, gameField);
-	std::cout << std::endl << "Y: " << gameField->getPlayerPosition(playerData)->y() << std::endl;
 	ASSERT_EQ(*gameField->getPlayerPosition(playerData), Coordinate(0, 1));
 }
+
+TEST(MovePlayerDecisionTest, When_OtherPlayerSurroundedByBorders_Assert_isValidMoveReturnsTrue)
+{
+	auto gameField = std::make_shared<GameField>();
+	auto otherPlayer = std::make_shared<PlayerData>("Dummy1", 0, BoardSides::Right);
+	auto playingPlayer = std::make_shared<PlayerData>("Dummy2", 1, BoardSides::Left);
+
+	gameField->setPlayerPosition(otherPlayer, std::make_shared<Coordinate>(3, 3));
+	gameField->setPlayerPosition(playingPlayer, std::make_shared<Coordinate>(4, 3));
+
+	gameField->setBorderBetweenCoordinates({3, 2}, {3, 3});
+	gameField->setBorderBetweenCoordinates({3, 3}, {3, 4});
+	gameField->setBorderBetweenCoordinates({2, 3}, {3, 3});
+
+	MovePlayerDecision decision(Direction::Left);
+
+	ASSERT_FALSE(decision.isValidMove(playingPlayer, gameField));
+}
+
+TEST(MovePlayerDecisionTest, When_BorderInFrontOfOtherPlayerToJumpOver_Assert_walksAlternativeDirection)
+{
+	auto gameField = std::make_shared<GameField>();
+	auto otherPlayer = std::make_shared<PlayerData>("Dummy1", 0, BoardSides::Right);
+	auto playingPlayer = std::make_shared<PlayerData>("Dummy2", 1, BoardSides::Left);
+
+	gameField->setPlayerPosition(otherPlayer, std::make_shared<Coordinate>(3, 3));
+	gameField->setPlayerPosition(playingPlayer, std::make_shared<Coordinate>(4, 3));
+
+	gameField->setBorderBetweenCoordinates({3, 3}, {3, 4});
+	gameField->setBorderBetweenCoordinates({2, 3}, {3, 3});
+
+	MovePlayerDecision decision(Direction::Left);
+
+	ASSERT_TRUE(decision.isValidMove(playingPlayer, gameField));
+	decision.executeMove(playingPlayer, gameField);
+	ASSERT_EQ(*gameField->getPlayerPosition(playingPlayer), Coordinate(3, 2));
+}
+
 
