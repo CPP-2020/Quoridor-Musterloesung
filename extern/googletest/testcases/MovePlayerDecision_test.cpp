@@ -70,6 +70,6 @@ TEST(MovePlayerDecisionTest, When_ExecuteValidMove_Assert_isPlayerAtCorrectCoord
 	ASSERT_TRUE(decision.isValidMove(playerData, gameField));
 	decision.executeMove(playerData, gameField);
 	std::cout << std::endl << "Y: " << gameField->getPlayerPosition(playerData)->y() << std::endl;
-	ASSERT_EQ(gameField->getPlayerPosition(playerData), std::make_shared<Coordinate>(0, 1));
+	ASSERT_EQ(*gameField->getPlayerPosition(playerData), Coordinate(0, 1));
 }
 

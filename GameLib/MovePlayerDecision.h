@@ -28,6 +28,7 @@ private:
 	bool isBorderInTheWay(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
 	bool isOutOfGameField(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
 	bool isOtherPlayerInTheWay(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
+	bool isOtherPlayerSurroundedByBorders(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
 };
 
 
