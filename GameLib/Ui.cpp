@@ -30,7 +30,6 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const
     drawGamePlayers(gameField, output);
     drawGameHorizontalBorders(gameField, output);
     drawGameVerticalBorders(gameField, output);
-
     drawGameOutputToCout(output);
 }
 
@@ -128,6 +127,9 @@ std::vector<std::vector<GamePrintTile>> Ui::buildOutputBuffer(
     int outputHeight = gameField->getHeight() * (fieldHeight + 1) + 1 + firstRowHeight;
     int outputWidth = gameField->getWidth() * (fieldWidth + 1) + 1 + firstColumnWidth;
 
+    outputHeight += 1; // Current player line
+    outputHeight += 1; // Player remaining borders line
+
     for (int x = 0; x < outputWidth; x++)
     {
         std::vector<GamePrintTile> line;
@@ -222,7 +224,7 @@ void Ui::drawGameVerticalBorders(const std::shared_ptr<const GameField> &gameFie
             if (!gameField->isOpenLeftOfCoordinate({x, y}))
             {
                 int xPosition = x * (fieldWidth + 1) + firstColumnWidth;
-                int yPosition = y * (fieldHeight + 1) + fieldWidth + firstRowHeight;
+                int yPosition = (y - 1) * (fieldHeight + 1) + fieldWidth + firstRowHeight;
 
                 output[xPosition][yPosition - 1].foregroundColor = ConsoleColor::Yellow;
                 output[xPosition][yPosition + 0].foregroundColor = ConsoleColor::Yellow;
