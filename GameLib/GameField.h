@@ -34,6 +34,8 @@ class GameField
     bool isOpenLeftOfCoordinate(Coordinate const &coordinate) const;
     bool isValidCoordinate(Coordinate const &coordinate) const;
 
+    std::vector<std::shared_ptr<const PlayerData>> getAllPlayersOnField() const;
+
     std::shared_ptr<Coordinate const> getPlayerPosition(std::shared_ptr<PlayerData const> const &player) const;
     void setPlayerPosition(std::shared_ptr<PlayerData const> player, std::shared_ptr<Coordinate const> position);
 
