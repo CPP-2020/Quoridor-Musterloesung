@@ -1,5 +1,4 @@
 #include "GameField.h"
-#include "GameField.h"
 #include "cassert"
 
 using Combinatorics::Edge;
@@ -49,7 +48,7 @@ const Position &GameField::getPosition(Coordinate const &coordinate) const
 bool GameField::isOpenBelowCoordinate(const Coordinate &coordinate) const
 {
     return m_graph.hasEdge(getPosition(coordinate).getVertex(),
-                           getPosition(coordinate.getAboveCoordinate()).getVertex());
+                           getPosition(coordinate.getBelowCoordinate()).getVertex());
 }
 
 bool GameField::isOpenLeftOfCoordinate(const Coordinate &coordinate) const
@@ -57,7 +56,6 @@ bool GameField::isOpenLeftOfCoordinate(const Coordinate &coordinate) const
     return m_graph.hasEdge(getPosition(coordinate).getVertex(),
                            getPosition(coordinate.getLeftCoordinate()).getVertex());
 }
-
 
 Position &GameField::getPosition(Coordinate const &coordinate)
 {
@@ -127,4 +125,16 @@ bool GameField::isValidCoordinate(const Coordinate &coordinate) const
     bool yValid = coordinate.y() >= 0 && coordinate.y() < s_height;
 
     return xValid && yValid;
+}
+
+std::vector<std::shared_ptr<const PlayerData>> GameField::getAllPlayersOnField() const
+{
+    std::vector<std::shared_ptr<const PlayerData>> allPlayers;
+
+    for (const auto &p: m_playerPositions)
+    {
+        allPlayers.push_back(p.first);
+    }
+
+    return allPlayers;
 }

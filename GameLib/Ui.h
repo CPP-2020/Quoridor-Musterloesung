@@ -10,6 +10,27 @@
 #include <string>
 #include <vector>
 
+enum class ConsoleColor {
+    Black,
+    Red,
+    Green,
+    Yellow,
+    Blue,
+    Magenta,
+    Cyan,
+    White,
+    Gray
+};
+
+class GamePrintTile {
+  public:
+    std::string character = " ";
+    ConsoleColor foregroundColor = ConsoleColor::Gray;
+    ConsoleColor backgroundColor;
+
+    void print();
+};
+
 class Ui
 {
   public:
@@ -21,12 +42,6 @@ class Ui
 
   private:
     void clearScreen() const;
-    void appendDelimiter(std::string &result,
-                         std::shared_ptr<const GameField> gameField,
-                         Coordinate const &coordinate) const;
-    void appendContent(std::string &result,
-                       std::shared_ptr<const GameField> gameField,
-                       Coordinate const &coordinate) const;
 };
 
 #endif // HACKATHON_UI_H

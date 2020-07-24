@@ -9,8 +9,7 @@
 TEST(UiTest, PleaseDrawABeautifulGameField)
 {
 	auto gameField = std::make_shared<GameField>();
-	auto playerData = std::make_shared<PlayerData>("Dummy", 0, BoardSides::Right);
-
+    auto playerData = std::make_shared<PlayerData>("Dummy", 0, BoardSides::Right);
 	gameField->setPlayerPosition(playerData, std::make_shared<Coordinate>(0, 0));
 
 	// Draw a large horizontal line
@@ -29,7 +28,10 @@ TEST(UiTest, PleaseDrawABeautifulGameField)
 	gameField->setBorderBetweenCoordinates({8, 6}, {8, 7});
 
 	Ui ui;
-	ui.drawGame(gameField);
 
-	ASSERT_TRUE(true);
+    std::cout << "====" << std::endl;
+    ui.drawGame(gameField);
+    std::cout << "====" << std::endl;
+
+    ASSERT_TRUE(true);
 }
