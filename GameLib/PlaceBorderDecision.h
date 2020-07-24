@@ -6,6 +6,7 @@
 #define HACKATHON_PLACEBORDERDECISION_H
 
 #include "GameDecision.h"
+#include <set>
 
 enum class BorderOrientation
 {
@@ -16,8 +17,7 @@ enum class BorderOrientation
 class PlaceBorderDecision : public GameDecision
 {
   public:
-    PlaceBorderDecision(const BorderOrientation &orientation,
-                        const Coordinate &topLeftCoordinate);
+    PlaceBorderDecision(const BorderOrientation &orientation, const Coordinate &topLeftCoordinate);
 
     bool isValidMove(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const override;
     void executeMove(std::shared_ptr<PlayerData> player, std::shared_ptr<GameField> gameField) override;
@@ -25,6 +25,12 @@ class PlaceBorderDecision : public GameDecision
   private:
     BorderOrientation orientation;
     Coordinate topLeftCoordinate;
+
+    bool borderDoesNotCatchPlayer(std::shared_ptr<const GameField> gameField,
+                                  std::shared_ptr<const PlayerData> player) const;
+
+    std::set<Combinatorics::EdgeId> getEdgesOfBorder(
+        const std::shared_ptr<const GameField> &gameField) const;
 };
 
 #endif // HACKATHON_PLACEBORDERDECISION_H
