@@ -23,7 +23,7 @@ std::shared_ptr<Player> GameHost::startGame(int fieldHeight, int fieldWidth)
     }
 
     placePlayersOnField();
-    givePayersBorders(fieldWidth, fieldHeight);
+	givePlayersBorders(fieldWidth, fieldHeight);
 
     ui->drawGame(gameField);
 
@@ -73,7 +73,7 @@ void GameHost::placePlayersOnField() const
     players[1]->getPlayerData()->setStartSide(BoardSides::Right);
 }
 
-void GameHost::givePayersBorders(int width, int height)
+void GameHost::givePlayersBorders(int width, int height)
 {
     int borderCount = (width + 1) * (height + 1) / 10;
 

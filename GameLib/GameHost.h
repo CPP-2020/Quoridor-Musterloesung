@@ -26,7 +26,7 @@ private:
     std::shared_ptr<GameField> gameField;
 
     void placePlayersOnField() const;
-    void GameHost::givePayersBorders(int width, int height);
+	void givePlayersBorders(int width, int height);
 };
 
 
