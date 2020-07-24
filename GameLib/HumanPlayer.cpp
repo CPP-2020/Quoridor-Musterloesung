@@ -85,8 +85,6 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
 {
     BorderOrientation borderOrientation;
 
-    Coordinate *coordinate;
-
     int XborderPlacement = ui->showMultipleIntChoice(
         "Where would you like to place the border (x value)?", 1, gameField->getWidth());
 
@@ -107,12 +105,12 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
 
     while (1)
     {                                               //-1 because of array indizies
-        coordinate = new Coordinate((XborderPlacement - 1), (YborderPlacement - 1));
+        Coordinate coordinate((XborderPlacement - 1), (YborderPlacement - 1));
 
-        if (gameField->isValidCoordinate(*coordinate))
+        if (gameField->isValidCoordinate(coordinate))
         {
             auto borderDecision =
-                std::make_shared<PlaceBorderDecision>(borderOrientation, *coordinate);
+                std::make_shared<PlaceBorderDecision>(borderOrientation, coordinate);
 
             if (borderDecision->isValidMove(playerData, gameField))
             {
