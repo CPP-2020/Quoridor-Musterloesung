@@ -13,13 +13,13 @@ class HumanPlayer : public Player
 {
 public:
   HumanPlayer(std::shared_ptr<PlayerData> playerData, std::shared_ptr<Ui> ui);
-  std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) override;
+  std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) const override;
 
 private:
-	std::shared_ptr<Ui> ui;
-	std::shared_ptr<GameDecision> getMoveDecision(std::shared_ptr<GameField const> gameField);
-	std::shared_ptr<GameDecision> getBorderDecision(std::shared_ptr<GameField const> gameField);
+	std::shared_ptr<Ui> ui;    
 
+	std::shared_ptr<GameDecision> getMoveDecision(std::shared_ptr<GameField const> gameField) const;
+	std::shared_ptr<GameDecision> getBorderDecision(std::shared_ptr<GameField const> gameField) const;
 };
 
 

@@ -45,7 +45,9 @@ add_library(GameLib
     GameLib/RandomBot.cpp
     GameLib/HumanPlayer.h
     GameLib/HumanPlayer.cpp
-        GameLib/Ui.cpp GameLib/Ui.h GameLib/GameHost.cpp GameLib/GameHost.h GameLib/Player.cpp GameLib/Player.h GameLib/GameRules.cpp GameLib/GameRules.h GameLib/GameDecision.cpp GameLib/GameDecision.h GameLib/PlaceBorderDecision.cpp GameLib/PlaceBorderDecision.h GameLib/MovePlayerDecision.cpp GameLib/MovePlayerDecision.h GameLib/DummyPlayer.cpp GameLib/DummyPlayer.h GameLib/PlayerData.cpp GameLib/PlayerData.h)
+    GameLib/SmartBot.h
+    GameLib/SmartBot.cpp
+        GameLib/Ui.cpp GameLib/Ui.h GameLib/GameHost.cpp GameLib/GameHost.h GameLib/Player.cpp GameLib/Player.h GameLib/GameRules.cpp GameLib/GameRules.h GameLib/GameDecision.cpp GameLib/GameDecision.h GameLib/PlaceBorderDecision.cpp GameLib/PlaceBorderDecision.h GameLib/MovePlayerDecision.cpp GameLib/MovePlayerDecision.h GameLib/DummyPlayer.cpp GameLib/DummyPlayer.h GameLib/PlayerData.cpp GameLib/PlayerData.h GameLib/ConsoleUi.cpp GameLib/ConsoleUi.h GameLib/NoOutputUi.cpp GameLib/NoOutputUi.h)
 
 add_executable(
     Hackathon

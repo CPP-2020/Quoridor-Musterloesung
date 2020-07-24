@@ -14,13 +14,36 @@ RandomBot::RandomBot(std::shared_ptr<PlayerData> playerData)
 {
 }
 
-std::shared_ptr<GameDecision> RandomBot::getGameDecision(std::shared_ptr<GameField const> gameField)
+std::shared_ptr<GameDecision> RandomBot::getGameDecision(std::shared_ptr<GameField const> gameField) const
 {
     srand((unsigned)time(0));
 
     
-    int i = (rand() % 2) ;
-    if (i == 0)
+    if ((0 == rand() % 2) && (0 != playerData->getRemainingBorders()))
+    {
+        BorderOrientation borderOrientation;
+
+        Coordinate *coordinate;
+
+        if ((rand() % 2) == 1)
+        {
+            borderOrientation = BorderOrientation::Vertical;
+        }
+        else
+        {
+            borderOrientation = BorderOrientation::Horizontal;
+        }
+        coordinate = new Coordinate((rand() % (gameField->getWidth() - 2)),
+                                    (rand() % (gameField->getHeight() - 2)));
+
+        if (gameField->isValidCoordinate(*coordinate))
+        {
+            auto borderDesicion =
+                std::make_shared<PlaceBorderDecision>(borderOrientation, *coordinate);
+            return borderDesicion;
+        }
+    }
+    else
     {
         while (true)
         {
@@ -31,30 +54,6 @@ std::shared_ptr<GameDecision> RandomBot::getGameDecision(std::shared_ptr<GameFie
                 return moveDecision;
             }
         }
-
     }
-    else
-    {
-        BorderOrientation borderOrientation;
-
-        Coordinate *coordinate;
-
-        if ((rand() % 2)==1)
-        {
-            borderOrientation = BorderOrientation::Vertical;
-        }
-        else
-        {
-            borderOrientation = BorderOrientation::Horizontal;
-        }
-        coordinate = new Coordinate((rand() % 9), (rand() % 9));
-
-        if (gameField->isValidCoordinate(*coordinate))
-        {
-            auto borderDesicion = std::make_shared<PlaceBorderDecision>(borderOrientation, *coordinate);
-            return borderDesicion;
-        }
-
-    }
-
+    
 }

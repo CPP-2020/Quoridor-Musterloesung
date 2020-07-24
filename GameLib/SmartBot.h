@@ -3,17 +3,17 @@
 //
 
 
-#ifndef HACKATHON_RANDOMBOT_H
-#define HACKATHON_RANDOMBOT_H
+#ifndef HACKATHON_SMARTBOT_H
+#define HACKATHON_SMARTBOT_H
 
 #include "Player.h"
 
 
-class RandomBot : public Player
+class SmartBot : public Player
 {
   public:
-    RandomBot(std::shared_ptr<PlayerData> playerData);
+    SmartBot(std::shared_ptr<PlayerData> playerData);
     std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) const override;
 };
 
-#endif // HACKATHON_RANDOMBOT_H
+#endif // HACKATHON_SMARTBOT_H

@@ -9,7 +9,7 @@ DummyPlayer::DummyPlayer(const std::shared_ptr<PlayerData> &playerData)
 }
 
 std::shared_ptr<GameDecision> DummyPlayer::getGameDecision(
-    std::shared_ptr<const GameField> gameField)
+    std::shared_ptr<const GameField> gameField) const
 {
     return std::make_shared<MovePlayerDecision>(Direction::Down);
 }
