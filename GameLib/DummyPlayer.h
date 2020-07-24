@@ -17,7 +17,7 @@ class DummyPlayer : public Player
   public:
     DummyPlayer(const std::shared_ptr<PlayerData> &playerData);
     std::shared_ptr<GameDecision> getGameDecision(
-        std::shared_ptr<const GameField> gameField) override;
+        std::shared_ptr<const GameField> gameField) const override;
 };
 
 #endif // HACKATHON_DUMMYPLAYER_H
