@@ -3,7 +3,4 @@
 //
 
 #include "Ui.h"
-#include "Player.h"
-#include <iostream>
-#include <memory>
-#include <vector>
+
