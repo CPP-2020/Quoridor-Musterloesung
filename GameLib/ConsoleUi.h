@@ -34,13 +34,13 @@ class GamePrintTile
 class ConsoleUi : public Ui
 {
   public:
-    void drawGame(std::shared_ptr<const GameField> gameField) const;
-    void showWinnerMessage(std::shared_ptr<const PlayerData> player) const;
-    void showMessage(const std::string &message) const;
+    void drawGame(std::shared_ptr<const GameField> gameField) const override;
+    void showWinnerMessage(std::shared_ptr<const PlayerData> player) const override;
+    void showMessage(const std::string &message) const override;
     int showMultipleChoice(const std::string &message,
-                           const std::vector<std::string> &answers) const;
-    int showMultipleIntChoice(const std::string &message, const int minValue,
-                              const int maxValue) const;
+                           const std::vector<std::string> &answers) const override;
+    int showMultipleIntChoice(const std::string &message, int minValue,
+                              int maxValue) const override;
 
   private:
     void clearScreen() const;
@@ -67,8 +67,8 @@ class ConsoleUi : public Ui
 
     int fieldHeight = 1;
     int fieldWidth = 3;
-    int firstColumnWidth = 2;
-    int firstRowHeight = 1;
+    int firstColumnWidth = 4;
+    int firstRowHeight = 2;
 };
 
 #endif // HACKATHON_CONSOLEUI_H
