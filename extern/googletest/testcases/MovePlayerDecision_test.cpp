@@ -111,7 +111,7 @@ TEST(MovePlayerDecisionTest, When_BorderInFrontOfOtherPlayerToJumpOver_Assert_wa
 
 TEST(MovePlayerDecisionTest, When_JumpOverGameFieldBorder_Assert_walksAlternativeDirection)
 {
-	auto gameField = std::make_shared<GameField>();
+	auto gameField = std::make_shared<GameField>(9, 9);
 	auto otherPlayer = std::make_shared<PlayerData>("Dummy1", 0, BoardSides::Right);
 	auto playingPlayer = std::make_shared<PlayerData>("Dummy2", 1, BoardSides::Left);
 
