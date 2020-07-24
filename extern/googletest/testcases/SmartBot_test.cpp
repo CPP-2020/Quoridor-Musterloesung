@@ -24,7 +24,7 @@ bool playGameWithSmartBotAndRandomBot()
 
     GameHost host(ui, players);
 
-    auto winner = host.startGame();
+    auto winner = host.startGame(9, 9);
 
     return winner == smartBot;
 }

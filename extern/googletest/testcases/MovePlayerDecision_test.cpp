@@ -8,7 +8,7 @@
 
 TEST(MovePlayerDecisionTest, When_MakeInvalidMoveToRight_Assert_isValidMoveReturnsFalse)
 {
-    auto gameField = std::make_shared<GameField>();
+    auto gameField = std::make_shared<GameField>(9, 9);
     auto playerData = std::make_shared<PlayerData>("Dummy", 0, BoardSides::Right);
 
     gameField->setPlayerPosition(playerData, std::make_shared<Coordinate>(0, 0));
@@ -23,7 +23,7 @@ TEST(MovePlayerDecisionTest, When_MakeInvalidMoveToRight_Assert_isValidMoveRetur
 
 TEST(MovePlayerDecisionTest, When_ValidMoveToRight_Assert_isValidMoveReturnsTrue)
 {
-    auto gameField = std::make_shared<GameField>();
+    auto gameField = std::make_shared<GameField>(9, 9);
     auto playerData = std::make_shared<PlayerData>("Dummy", 0, BoardSides::Right);
 
     gameField->setPlayerPosition(playerData, std::make_shared<Coordinate>(0, 0));
@@ -35,7 +35,7 @@ TEST(MovePlayerDecisionTest, When_ValidMoveToRight_Assert_isValidMoveReturnsTrue
 
 TEST(MovePlayerDecisionTest, When_InValidMoveDown_Assert_isValidMoveReturnsFalse)
 {
-    auto gameField = std::make_shared<GameField>();
+    auto gameField = std::make_shared<GameField>(9, 9);
     auto playerData = std::make_shared<PlayerData>("Dummy", 0, BoardSides::Right);
 
     gameField->setPlayerPosition(playerData, std::make_shared<Coordinate>(0, 0));
@@ -48,7 +48,7 @@ TEST(MovePlayerDecisionTest, When_InValidMoveDown_Assert_isValidMoveReturnsFalse
 
 TEST(MovePlayerDecisionTest, When_ValidMoveDown_Assert_isValidMoveReturnsTrue)
 {
-    auto gameField = std::make_shared<GameField>();
+    auto gameField = std::make_shared<GameField>(9, 9);
     auto playerData = std::make_shared<PlayerData>("Dummy", 0, BoardSides::Right);
 
     gameField->setPlayerPosition(playerData, std::make_shared<Coordinate>(0, 0));
@@ -60,7 +60,7 @@ TEST(MovePlayerDecisionTest, When_ValidMoveDown_Assert_isValidMoveReturnsTrue)
 
 TEST(MovePlayerDecisionTest, When_ExecuteValidMove_Assert_isPlayerAtCorrectCoordinate)
 {
-	auto gameField = std::make_shared<GameField>();
+	auto gameField = std::make_shared<GameField>(9, 9);
 	auto playerData = std::make_shared<PlayerData>("Dummy", 0, BoardSides::Right);
 
 	gameField->setPlayerPosition(playerData, std::make_shared<Coordinate>(0, 0));
@@ -74,7 +74,7 @@ TEST(MovePlayerDecisionTest, When_ExecuteValidMove_Assert_isPlayerAtCorrectCoord
 
 TEST(MovePlayerDecisionTest, When_OtherPlayerSurroundedByBorders_Assert_isValidMoveReturnsTrue)
 {
-	auto gameField = std::make_shared<GameField>();
+	auto gameField = std::make_shared<GameField>(9, 9);
 	auto otherPlayer = std::make_shared<PlayerData>("Dummy1", 0, BoardSides::Right);
 	auto playingPlayer = std::make_shared<PlayerData>("Dummy2", 1, BoardSides::Left);
 
@@ -92,7 +92,7 @@ TEST(MovePlayerDecisionTest, When_OtherPlayerSurroundedByBorders_Assert_isValidM
 
 TEST(MovePlayerDecisionTest, When_BorderInFrontOfOtherPlayerToJumpOver_Assert_walksAlternativeDirection)
 {
-	auto gameField = std::make_shared<GameField>();
+	auto gameField = std::make_shared<GameField>(9, 9);
 	auto otherPlayer = std::make_shared<PlayerData>("Dummy1", 0, BoardSides::Right);
 	auto playingPlayer = std::make_shared<PlayerData>("Dummy2", 1, BoardSides::Left);
 
