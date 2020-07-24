@@ -57,3 +57,19 @@ TEST(MovePlayerDecisionTest, When_ValidMoveDown_Assert_isValidMoveReturnsTrue)
 
     ASSERT_TRUE(decision.isValidMove(playerData, gameField));
 }
+
+TEST(MovePlayerDecisionTest, When_ExecuteValidMove_Assert_isPlayerAtCorrectCoordinate)
+{
+	auto gameField = std::make_shared<GameField>();
+	auto playerData = std::make_shared<PlayerData>("Dummy", 0, BoardSides::Right);
+
+	gameField->setPlayerPosition(playerData, std::make_shared<Coordinate>(0, 0));
+
+	MovePlayerDecision decision(Direction::Down);
+
+	ASSERT_TRUE(decision.isValidMove(playerData, gameField));
+	decision.executeMove(playerData, gameField);
+	std::cout << std::endl << "Y: " << gameField->getPlayerPosition(playerData)->y() << std::endl;
+	ASSERT_EQ(gameField->getPlayerPosition(playerData), std::make_shared<Coordinate>(0, 1));
+}
+
