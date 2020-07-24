@@ -24,11 +24,13 @@ public:
 
 private:
 	Direction direction;
+	Direction getOppositeDirection(const Direction &d) const;
 	std::shared_ptr<const Coordinate> getNextPlayerCoordinate(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
 	bool isBorderInTheWay(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
 	bool isOutOfGameField(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
 	bool isOtherPlayerInTheWay(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
-	bool isOtherPlayerSurroundedByBorders(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
+	bool isPlayerInFrontSurroundedByBorders(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const;
+	std::vector<Direction> getReachableNeighbours(const Coordinate &playerCoordinate, std::shared_ptr<const GameField> gameField) const;
 };
 
 
