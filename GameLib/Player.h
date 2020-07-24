@@ -15,7 +15,7 @@
 class Player {
 public:
 	Player(std::shared_ptr<PlayerData> playerData);
-	virtual std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) = 0;
+	virtual std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) const = 0;
 
     std::shared_ptr<PlayerData const> getPlayerData() const;
     std::shared_ptr<PlayerData> getPlayerData();

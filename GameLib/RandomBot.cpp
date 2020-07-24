@@ -14,7 +14,7 @@ RandomBot::RandomBot(std::shared_ptr<PlayerData> playerData)
 {
 }
 
-std::shared_ptr<GameDecision> RandomBot::getGameDecision(std::shared_ptr<GameField const> gameField)
+std::shared_ptr<GameDecision> RandomBot::getGameDecision(std::shared_ptr<GameField const> gameField) const
 {
     srand((unsigned)time(0));
 

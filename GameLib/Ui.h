@@ -39,6 +39,8 @@ class Ui
     void showMessage(const std::string &message) const;
     int showMultipleChoice(const std::string &message,
                            const std::vector<std::string> &answers) const;
+    int showMultipleIntChoice(const std::string &message, const int minValue,
+        const int maxValue) const;
 
   private:
     void clearScreen() const;

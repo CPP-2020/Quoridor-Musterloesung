@@ -13,7 +13,7 @@ class RandomBot : public Player
 {
   public:
     RandomBot(std::shared_ptr<PlayerData> playerData);
-    std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) override;
+    std::shared_ptr<GameDecision> getGameDecision(std::shared_ptr<GameField const> gameField) const override;
 };
 
 #endif // HACKATHON_RANDOMBOT_H
