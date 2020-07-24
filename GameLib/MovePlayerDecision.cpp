@@ -5,6 +5,8 @@
 #include "MovePlayerDecision.h"
 #include "Position.h"
 #include "GameField.h"
+#include "../Graph/Graph.h"
+#include "../Graph/Algorithm/BreadthFirstSearch.h"
 
 MovePlayerDecision::MovePlayerDecision(Direction direction)
 	: direction(direction)
@@ -81,5 +83,6 @@ bool MovePlayerDecision::isOtherPlayerInTheWay(std::shared_ptr<const PlayerData>
 
 bool MovePlayerDecision::isOtherPlayerSurroundedByBorders(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
 {
-	return false;
+	auto graph = gameField->getGraph();
+
 }
