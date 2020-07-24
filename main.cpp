@@ -4,6 +4,7 @@
 #include "GameLib/Player.h"
 #include "GameLib/RandomBot.h"
 #include "GameLib/Ui.h"
+#include "GameLib/SmartBot.h"
 
 #include <memory>
 
@@ -58,7 +59,7 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
         message = "What should be the second player?";
     }
 
-    int choice = ui->showMultipleChoice(message, {"Human player", "Random player"});
+    int choice = ui->showMultipleChoice(message, {"Human player", "Random player", "SmartBot"});
 
     if (choice == 1)
     {
@@ -76,6 +77,8 @@ std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int player
 
     if (choice == 3)
     {
+        return std::make_shared<SmartBot>(std::make_shared<PlayerData>(
+            "Player " + std::to_string(playerId), playerId, BoardSides::Right));
     }
 
     if (choice == 4)
