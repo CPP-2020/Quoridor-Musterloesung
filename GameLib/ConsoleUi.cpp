@@ -33,7 +33,7 @@ void ConsoleUi::drawGame(std::shared_ptr<const GameField> gameField) const
 
 void ConsoleUi::showWinnerMessage(std::shared_ptr<const PlayerData> player) const
 {
-    std::cout << "Player " << player->getName() << " has won! Congrats!" << std::endl;
+    std::cout << player->getName() << " has won! Congrats!" << std::endl;
 }
 
 void ConsoleUi::showMessage(const std::string &message) const
