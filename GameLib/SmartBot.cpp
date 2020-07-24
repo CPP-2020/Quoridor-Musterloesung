@@ -14,7 +14,7 @@ SmartBot::SmartBot(std::shared_ptr<PlayerData> playerData)
 {
 }
 
-std::shared_ptr<GameDecision> SmartBot::getGameDecision(std::shared_ptr<GameField const> gameField)
+std::shared_ptr<GameDecision> SmartBot::getGameDecision(std::shared_ptr<GameField const> gameField) const
 {
     
         while (true)

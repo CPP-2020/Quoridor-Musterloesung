@@ -121,10 +121,17 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
             }
         }
 
+
+        ui->showMessage(
+            "Cant place border here! Where would you like to place your border instead?");
+
         XborderPlacement = ui->showMultipleIntChoice(
-            "Where would you like to place the border (x value)?", 1, gameField->getWidth());
+            "Please select a new x value:", 1, gameField->getWidth());
 
         YborderPlacement = ui->showMultipleIntChoice(
-            "Where would you like to place the border (y value)?", 1, gameField->getHeight());
+            "Please select also a new y value:", 1, gameField->getHeight());
+
+         orientation = ui->showMultipleChoice("How would you like to place this new border?",
+            {"Vertical", "Horizontal"});
     }
 }
