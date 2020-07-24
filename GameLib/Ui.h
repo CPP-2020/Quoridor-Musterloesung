@@ -10,7 +10,8 @@
 #include <string>
 #include <vector>
 
-enum class ConsoleColor {
+enum class ConsoleColor
+{
     Black,
     Red,
     Green,
@@ -22,7 +23,8 @@ enum class ConsoleColor {
     Gray
 };
 
-class GamePrintTile {
+class GamePrintTile
+{
   public:
     std::string character = " ";
     ConsoleColor foregroundColor = ConsoleColor::Gray;
@@ -44,6 +46,31 @@ class Ui
 
   private:
     void clearScreen() const;
+
+    void drawGameRowColumnNumbers(std::shared_ptr<const GameField> gameField,
+                                  std::vector<std::vector<GamePrintTile>> &output) const;
+
+    void drawGameGrid(const std::shared_ptr<const GameField> &gameField,
+                      std::vector<std::vector<GamePrintTile>> &output) const;
+
+    void drawGamePlayers(const std::shared_ptr<const GameField> &gameField,
+                         std::vector<std::vector<GamePrintTile>> &output) const;
+
+    void drawGameHorizontalBorders(const std::shared_ptr<const GameField> &gameField,
+                                   std::vector<std::vector<GamePrintTile>> &output) const;
+
+    void drawGameVerticalBorders(const std::shared_ptr<const GameField> &gameField,
+                                 std::vector<std::vector<GamePrintTile>> &output) const;
+
+    void drawGameOutputToCout(std::vector<std::vector<GamePrintTile>> &output) const;
+
+    std::vector<std::vector<GamePrintTile>> buildOutputBuffer(
+        const std::shared_ptr<const GameField> &gameField) const;
+
+    int fieldHeight = 1;
+    int fieldWidth = 3;
+    int firstColumnWidth = 2;
+    int firstRowHeight = 1;
 };
 
 #endif // HACKATHON_UI_H

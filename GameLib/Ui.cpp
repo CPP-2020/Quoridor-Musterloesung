@@ -20,20 +20,115 @@
 
 void Ui::drawGame(std::shared_ptr<const GameField> gameField) const
 {
+    // TODO: Current players
+    // TODO: Player statistics
 
-    // TODO: Colors correctly
-    // TODO: Think about a design without colors
-    // TODO: Row and column numbers
+    std::vector<std::vector<GamePrintTile>> output = buildOutputBuffer(gameField);
 
-    int fieldHeight = 1;
-    int fieldWidth = 3;
-    int firstColumnWidth = 2;
-    int firstRowHeight = 1;
+    drawGameRowColumnNumbers(gameField, output);
+    drawGameGrid(gameField, output);
+    drawGamePlayers(gameField, output);
+    drawGameHorizontalBorders(gameField, output);
+    drawGameVerticalBorders(gameField, output);
+    drawGameOutputToCout(output);
+}
 
+void Ui::showWinnerMessage(std::shared_ptr<const PlayerData> player) const
+{
+    std::cout << "Player " << player->getName() << " has won! Congrats!" << std::endl;
+}
+
+void Ui::showMessage(const std::string &message) const
+{
+    std::cout << message << std::endl;
+}
+
+int Ui::showMultipleChoice(const std::string &message,
+                           const std::vector<std::string> &answers) const
+{
+    int result;
+
+    std::cout << message << std::endl;
+
+    for (int i = 0; i < answers.size(); i++)
+    {
+        std::cout << i + 1 << ": " << answers[i] << std::endl;
+    }
+
+    std::cout << "Answer: ";
+    std::cin >> result;
+
+    while (std::cin.fail() || result > answers.size() || result < 1)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "The given answer was invalid! Please enter a new answer: ";
+        std::cin >> result;
+    }
+
+    return result;
+}
+
+void Ui::clearScreen() const
+{
+#ifdef _WIN32
+    HANDLE hStdOut;
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    DWORD count;
+    DWORD cellCount;
+    COORD homeCoords = {0, 0};
+
+    hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hStdOut == INVALID_HANDLE_VALUE)
+    {
+        return;
+    }
+
+    // Get the number of cells in the current buffer
+    if (!GetConsoleScreenBufferInfo(hStdOut, &csbi))
+    {
+        return;
+    }
+    cellCount = csbi.dwSize.X * csbi.dwSize.Y;
+
+    // Fill the entire buffer with spaces
+    if (!FillConsoleOutputCharacter(hStdOut, (TCHAR)' ', cellCount, homeCoords, &count))
+    {
+        return;
+    }
+
+    // Fill the entire buffer with the current colors and attributes
+    if (!FillConsoleOutputAttribute(hStdOut, csbi.wAttributes, cellCount, homeCoords, &count))
+    {
+        return;
+    }
+
+    // Move the cursor home
+    SetConsoleCursorPosition(hStdOut, homeCoords);
+
+#else
+    if (!cur_term)
+    {
+        int result;
+        setupterm(NULL, STDOUT_FILENO, &result);
+        if (result <= 0)
+        {
+            return;
+        }
+    }
+#endif
+}
+
+std::vector<std::vector<GamePrintTile>> Ui::buildOutputBuffer(
+    const std::shared_ptr<const GameField> &gameField) const
+{
     std::vector<std::vector<GamePrintTile>> output;
 
     int outputHeight = gameField->getHeight() * (fieldHeight + 1) + 1 + firstRowHeight;
     int outputWidth = gameField->getWidth() * (fieldWidth + 1) + 1 + firstColumnWidth;
+
+    outputHeight += 1; // Current player line
+    outputHeight += 1; // Player remaining borders line
 
     for (int x = 0; x < outputWidth; x++)
     {
@@ -46,7 +141,12 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const
 
         output.push_back(line);
     }
+    return output;
+}
 
+void Ui::drawGameRowColumnNumbers(std::shared_ptr<const GameField> gameField,
+                                  std::vector<std::vector<GamePrintTile>> &output) const
+{
     // Draw the row indices
     for (int y = 0; y < gameField->getHeight() - 1; y++)
     {
@@ -58,26 +158,11 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const
     {
         output[(y + 1) * 4 + firstColumnWidth][0].character = std::to_string(y + 1);
     }
+}
 
-    // Draw the -
-    for (int y = 0; y < gameField->getHeight() + 1; y++)
-    {
-        for (int x = firstColumnWidth; x < outputWidth; x++)
-        {
-            output[x][y * 2 + firstRowHeight].character = " ";
-        }
-    }
-
-    // Draw the |
-    for (int y = 0; y < gameField->getHeight(); y++)
-    {
-        for (int x = 0; x < gameField->getWidth() + 1; x++)
-        {
-            output[x * (fieldWidth + 1) + firstColumnWidth][y * 2 + 1 + firstRowHeight].character =
-                " ";
-        }
-    }
-
+void Ui::drawGameGrid(const std::shared_ptr<const GameField> &gameField,
+                      std::vector<std::vector<GamePrintTile>> &output) const
+{
     // Draw the +
     for (int y = 0; y < gameField->getHeight() + 1; y++)
     {
@@ -86,8 +171,11 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const
             output[x * (fieldWidth + 1) + firstColumnWidth][y * 2 + firstRowHeight].character = "+";
         }
     }
+}
 
-    // Draw the players
+void Ui::drawGamePlayers(const std::shared_ptr<const GameField> &gameField,
+                         std::vector<std::vector<GamePrintTile>> &output) const
+{
     for (const auto &p: gameField->getAllPlayersOnField())
     {
         auto position = gameField->getPlayerPosition(p);
@@ -98,13 +186,16 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const
         output[xPosition][yPosition].character = "X";
         output[xPosition][yPosition].foregroundColor = ConsoleColor::Red;
     }
+}
 
+void Ui::drawGameHorizontalBorders(const std::shared_ptr<const GameField> &gameField,
+                                   std::vector<std::vector<GamePrintTile>> &output) const
+{
     // Color the horizontal borders
     for (int y = 0; y < gameField->getHeight() - 1; y++)
     {
         for (int x = 0; x < gameField->getWidth(); x++)
         {
-
             if (!gameField->isOpenBelowCoordinate({x, y}))
             {
                 int xPosition = x * (fieldWidth + 1) + 2 + firstColumnWidth;
@@ -121,8 +212,11 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const
             }
         }
     }
+}
 
-    // Color the vertical borders
+void Ui::drawGameVerticalBorders(const std::shared_ptr<const GameField> &gameField,
+                                 std::vector<std::vector<GamePrintTile>> &output) const
+{
     for (int y = 0; y < gameField->getHeight(); y++)
     {
         for (int x = 1; x < gameField->getWidth(); x++)
@@ -130,7 +224,7 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const
             if (!gameField->isOpenLeftOfCoordinate({x, y}))
             {
                 int xPosition = x * (fieldWidth + 1) + firstColumnWidth;
-                int yPosition = y * (fieldHeight + 1) + fieldWidth + firstRowHeight;
+                int yPosition = (y - 1) * (fieldHeight + 1) + fieldWidth + firstRowHeight;
 
                 output[xPosition][yPosition - 1].foregroundColor = ConsoleColor::Yellow;
                 output[xPosition][yPosition + 0].foregroundColor = ConsoleColor::Yellow;
@@ -139,8 +233,10 @@ void Ui::drawGame(std::shared_ptr<const GameField> gameField) const
             }
         }
     }
+}
 
-    // Print the output
+void Ui::drawGameOutputToCout(std::vector<std::vector<GamePrintTile>> &output) const
+{
     for (int y = 0; y < output[0].size(); y++)
     {
         for (int x = 0; x < output.size(); x++)
@@ -289,9 +385,7 @@ void GamePrintTile::print()
 
     SetConsoleTextAttribute(hStdOut, info.wAttributes);
 }
-
 #else
-
 void GamePrintTile::print()
 {
     std::string colorCode = "";

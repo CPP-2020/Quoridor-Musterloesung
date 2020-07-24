@@ -83,16 +83,16 @@ namespace Combinatorics
         std::queue<VertexId> q;
         q.push(start_id);
         _dist[start_id] = 0;
-
         while (!q.empty())
         {
             Vertex const & current =_g.getVertex(q.front());
             q.pop();
-            for (EdgeId edge_id = EdgeId(0); edge_id < current.numEdges(); ++edge_id)
+            for (EdgeId neighbour_edge_id = EdgeId(0); neighbour_edge_id < current.numEdges(); ++neighbour_edge_id)
             {
-                if (edge_is_allowed(edge_id))
+                Edge const & edge = current.getEdge(neighbour_edge_id);
+                if (edge_is_allowed(edge.getId()))
                 {
-                    Vertex const &neighbour = current.getEdge(edge_id).getOtherEndpoint(current);
+                    Vertex const &neighbour = edge.getOtherEndpoint(current);
                     if (_dist[neighbour] == Graph::INVALID_VERTEX_ID)
                     {
                         // We found this vertex for the first time
