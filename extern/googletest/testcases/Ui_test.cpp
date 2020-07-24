@@ -1,8 +1,9 @@
 #include "gtest/gtest.h"
 
+#include "../../../GameLib/ConsoleUi.h"
 #include "../../../GameLib/DummyPlayer.h"
-#include "../../../GameLib/Ui.h"
 #include "../../../GameLib/GameField.h"
+#include "../../../GameLib/Ui.h"
 
 #include <memory>
 
@@ -27,7 +28,7 @@ TEST(UiTest, PleaseDrawABeautifulGameField)
 	// Draw a single horizontal line
 	gameField->setBorderBetweenCoordinates({8, 6}, {8, 7});
 
-	Ui ui;
+	ConsoleUi ui;
 
     std::cout << "====" << std::endl;
     ui.drawGame(gameField);
