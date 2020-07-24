@@ -73,3 +73,25 @@ TEST(MovePlayerDecisionTest, When_ExecuteValidMove_Assert_isPlayerAtCorrectCoord
 	ASSERT_EQ(*gameField->getPlayerPosition(playerData), Coordinate(0, 1));
 }
 
+TEST(MovePlayerDecisionTest, When_OtherPlayerSurroundedByBorders_Assert_isValidMoveReturnsTrue)
+{
+	auto gameField = std::make_shared<GameField>();
+	auto playerData1 = std::make_shared<PlayerData>("Dummy1", 0, BoardSides::Right);
+	auto playerData2 = std::make_shared<PlayerData>("Dummy2", 1, BoardSides::Left);
+
+	gameField->setPlayerPosition(playerData1, std::make_shared<Coordinate>(3, 3));
+	gameField->setPlayerPosition(playerData2, std::make_shared<Coordinate>(4, 3));
+
+	gameField->setBorderBetweenCoordinates({3, 2}, {3, 3});
+	gameField->setBorderBetweenCoordinates({3, 3}, {3, 4});
+	gameField->setBorderBetweenCoordinates({2, 3}, {3, 3});
+
+	Ui ui;
+	ui.drawGame(gameField);
+
+	MovePlayerDecision decision(Direction::Left);
+
+	ASSERT_FALSE(decision.isValidMove(playerData1, gameField));
+	decision.executeMove(playerData1, gameField);
+}
+

@@ -18,7 +18,7 @@ bool MovePlayerDecision::isValidMove(std::shared_ptr<const PlayerData> player, s
 {
 	return !isOutOfGameField(player, gameField) &&
 		   !isBorderInTheWay(player, gameField) &&
-		   !(isOtherPlayerInTheWay(player, gameField) && isOtherPlayerSurroundedByBorders(player, gameField));
+		   !(isOtherPlayerInTheWay(player, gameField) && isPlayerInFrontSurroundedByBorders(player, gameField));
 }
 
 void MovePlayerDecision::executeMove(std::shared_ptr<PlayerData> player, std::shared_ptr<GameField> gameField)
@@ -81,8 +81,17 @@ bool MovePlayerDecision::isOtherPlayerInTheWay(std::shared_ptr<const PlayerData>
 	return gameField->isOtherPlayerAtPosition(player, *getNextPlayerCoordinate(player, gameField));
 }
 
-bool MovePlayerDecision::isOtherPlayerSurroundedByBorders(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
+bool MovePlayerDecision::isPlayerInFrontSurroundedByBorders(std::shared_ptr<const PlayerData> player, std::shared_ptr<const GameField> gameField) const
 {
-	auto graph = gameField->getGraph();
+	const Combinatorics::Graph &graph = gameField->getGraph();
+	const Coordinate otherPlayerCoordinate = *getNextPlayerCoordinate(player, gameField);
+	Combinatorics::BreadthFirstSearch bfs(graph, gameField->getPosition(otherPlayerCoordinate).getVertex());
 
+	int reacheableNeighbours = 0;
+	reacheableNeighbours += bfs.is_reachable(gameField->getPosition(otherPlayerCoordinate.getLeftCoordinate()).getVertex());
+	reacheableNeighbours += bfs.is_reachable(gameField->getPosition(otherPlayerCoordinate.getRightCoordinate()).getVertex());
+	reacheableNeighbours += bfs.is_reachable(gameField->getPosition(otherPlayerCoordinate.getAboveCoordinate()).getVertex());
+	reacheableNeighbours += bfs.is_reachable(gameField->getPosition(otherPlayerCoordinate.getBelowCoordinate()).getVertex());
+
+	return reacheableNeighbours <= 1;
 }
