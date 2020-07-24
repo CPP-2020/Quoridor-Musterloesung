@@ -13,11 +13,15 @@ HumanPlayer::HumanPlayer(std::shared_ptr<PlayerData> playerData, std::shared_ptr
 {
 }
 
-std::shared_ptr<GameDecision> HumanPlayer::getGameDecision( // Choose if the player wants to move or
-                                                            // place a border
+// Choose if the player wants to move or to place a border
+std::shared_ptr<GameDecision> HumanPlayer::getGameDecision(
     std::shared_ptr<GameField const> gameField) const
 {
-    if (playerData->getRemainingBorders() < 1) // If the player has no remaining borders, he can only move
+    ui->showMessage(playerData->getName() + " its your turn! You have " +
+                    std::to_string(playerData->getRemainingBorders()) + " remaining borders.");
+
+    // If the player has no remaining borders, he can only move
+    if (playerData->getRemainingBorders() < 1)
     {
         ui->showMessage("You have no remaining borders, so you can only move!");
         return getMoveDecision(gameField);
@@ -103,8 +107,8 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
     }
 
     while (1)
-    {
-        coordinate = new Coordinate((XborderPlacement - 1), (YborderPlacement - 1));    //-1 because of array indizies
+    {                                               //-1 because of array indizies
+        coordinate = new Coordinate((XborderPlacement - 1), (YborderPlacement - 1));
 
         if (gameField->isValidCoordinate(*coordinate))
         {

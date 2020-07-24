@@ -48,7 +48,6 @@ void startGame(std::shared_ptr<Ui> ui)
 std::shared_ptr<Player> getPlayerByUserChoice(std::shared_ptr<Ui> ui, int playerId)
 {
     std::string message;
-    // auto PlayerData = std::make_shared<Player>();
 
     if (playerId == 1)
     {
