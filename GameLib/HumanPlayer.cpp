@@ -18,7 +18,7 @@ std::shared_ptr<GameDecision> HumanPlayer::getGameDecision(
     std::shared_ptr<GameField const> gameField) const
 {
     ui->showMessage(playerData->getName() + " its your turn! You have " +
-                    std::to_string(playerData->getRemainingBorders()) + " borders left.");
+                    std::to_string(playerData->getRemainingBorders()) + " remaining borders.");
 
     // If the player has no remaining borders, he can only move
     if (playerData->getRemainingBorders() < 1)
