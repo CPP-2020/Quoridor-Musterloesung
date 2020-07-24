@@ -28,7 +28,7 @@ void MovePlayerDecision::executeMove(std::shared_ptr<PlayerData> player, std::sh
 		// First go in the specified direction (to the position where the other player is)
 		gameField->setPlayerPosition(player, getNextPlayerCoordinate(player, gameField));
 
-		if(!isBorderInTheWay(player, gameField))
+		if(!isOutOfGameField(player, gameField) && !isBorderInTheWay(player, gameField))
 		{
 			// Go into the same direction again
 			gameField->setPlayerPosition(player, getNextPlayerCoordinate(player, gameField));
@@ -117,19 +117,24 @@ std::vector<Direction> MovePlayerDecision::getReachableNeighbours(const Coordina
 	Combinatorics::BreadthFirstSearch bfs(gameField->getGraph(),
 										  gameField->getPosition(playerCoordinate).getVertex());
 
-	if(bfs.getPath(gameField->getPosition(playerCoordinate.getLeftCoordinate()).getVertex()).size() == 2)
+
+	if(gameField->isValidCoordinate(playerCoordinate.getLeftCoordinate()) &&
+	   bfs.getPath(gameField->getPosition(playerCoordinate.getLeftCoordinate()).getVertex()).size() == 2)
 	{
 		reachableNeighbours.push_back(Direction::Left);
 	}
-	if(bfs.getPath(gameField->getPosition(playerCoordinate.getRightCoordinate()).getVertex()).size() == 2)
+	if(gameField->isValidCoordinate(playerCoordinate.getRightCoordinate()) &&
+	   bfs.getPath(gameField->getPosition(playerCoordinate.getRightCoordinate()).getVertex()).size() == 2)
 	{
 		reachableNeighbours.push_back(Direction::Right);
 	}
-	if(bfs.getPath(gameField->getPosition(playerCoordinate.getAboveCoordinate()).getVertex()).size() == 2)
+	if(gameField->isValidCoordinate(playerCoordinate.getAboveCoordinate()) &&
+	   bfs.getPath(gameField->getPosition(playerCoordinate.getAboveCoordinate()).getVertex()).size() == 2)
 	{
 		reachableNeighbours.push_back(Direction::Up);
 	}
-	if(bfs.getPath(gameField->getPosition(playerCoordinate.getBelowCoordinate()).getVertex()).size() == 2)
+	if(gameField->isValidCoordinate(playerCoordinate.getBelowCoordinate()) &&
+	   bfs.getPath(gameField->getPosition(playerCoordinate.getBelowCoordinate()).getVertex()).size() == 2)
 	{
 		reachableNeighbours.push_back(Direction::Down);
 	}
