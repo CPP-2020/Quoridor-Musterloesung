@@ -83,7 +83,6 @@ std::shared_ptr<GameDecision> HumanPlayer::getMoveDecision(
 std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
     std::shared_ptr<GameField const> gameField) const
 {
-    bool correctPlacement = false;
     BorderOrientation borderOrientation;
 
     Coordinate *coordinate;
@@ -112,12 +111,12 @@ std::shared_ptr<GameDecision> HumanPlayer::getBorderDecision(
 
         if (gameField->isValidCoordinate(*coordinate))
         {
-            auto borderDesicion =
+            auto borderDecision =
                 std::make_shared<PlaceBorderDecision>(borderOrientation, *coordinate);
 
-            if (borderDesicion->isValidMove(playerData, gameField))
+            if (borderDecision->isValidMove(playerData, gameField))
             {
-                return borderDesicion;
+                return borderDecision;
             }
         }
 
