@@ -16,8 +16,8 @@ class NoOutputUi : public Ui
     int showMultipleChoice(const std::string &message,
                            const std::vector<std::string> &answers) const override;
     int showMultipleIntChoice(const std::string &message,
-                              const int minValue,
-                              const int maxValue) const override;
+                              int minValue,
+                              int maxValue) const override;
 };
 
 #endif // HACKATHON_NOOUTPUTUI_H

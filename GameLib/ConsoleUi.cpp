@@ -75,8 +75,7 @@ std::vector<std::vector<GamePrintTile>> ConsoleUi::buildOutputBuffer(
     int outputHeight = gameField->getHeight() * (fieldHeight + 1) + 1 + firstRowHeight;
     int outputWidth = gameField->getWidth() * (fieldWidth + 1) + 1 + firstColumnWidth;
 
-    outputHeight += 1; // Current player line
-    outputHeight += 1; // Player remaining borders line
+    outputHeight++; // Add one line of padding at the bottom
 
     for (int x = 0; x < outputWidth; x++)
     {
@@ -98,13 +97,30 @@ void ConsoleUi::drawGameRowColumnNumbers(std::shared_ptr<const GameField> gameFi
     // Draw the row indices
     for (int y = 0; y < gameField->getHeight() - 1; y++)
     {
-        output[0][(y + 1) * 2 + firstRowHeight].character = std::to_string(y + 1);
+        bool isTwoDigit = (y + 1) >= 10;
+
+        if (isTwoDigit)
+        {
+            output[0][(y + 1) * 2 + firstRowHeight].character = "";
+        }
+
+        output[firstColumnWidth - (isTwoDigit ? 2 : 3)][(y + 1) * 2 + firstRowHeight].character =
+            std::to_string(y + 1);
     }
 
     // Draw the column indices
     for (int y = 0; y < gameField->getWidth() - 1; y++)
     {
-        output[(y + 1) * 4 + firstColumnWidth][0].character = std::to_string(y + 1);
+        bool isTwoDigit = (y + 1) >= 10;
+
+        if (isTwoDigit)
+        {
+            output[(y + 1) * 4 + firstColumnWidth + 1][firstRowHeight - 1]
+                .character = "";
+        }
+
+        output[(y + 1) * 4 + firstColumnWidth - (isTwoDigit ? 1 : 0)][firstRowHeight - 1]
+            .character = std::to_string(y + 1);
     }
 }
 
@@ -124,6 +140,9 @@ void ConsoleUi::drawGameGrid(const std::shared_ptr<const GameField> &gameField,
 void ConsoleUi::drawGamePlayers(const std::shared_ptr<const GameField> &gameField,
                                 std::vector<std::vector<GamePrintTile>> &output) const
 {
+    std::vector<ConsoleColor> colors = {ConsoleColor::Red, ConsoleColor::Cyan};
+    int currentColor = 0;
+
     for (const auto &p: gameField->getAllPlayersOnField())
     {
         auto position = gameField->getPlayerPosition(p);
@@ -132,7 +151,9 @@ void ConsoleUi::drawGamePlayers(const std::shared_ptr<const GameField> &gameFiel
         int yPosition = position->y() * (fieldHeight + 1) + 1 + firstRowHeight;
 
         output[xPosition][yPosition].character = "X";
-        output[xPosition][yPosition].foregroundColor = ConsoleColor::Red;
+        output[xPosition][yPosition].foregroundColor = colors[currentColor];
+
+        currentColor = (currentColor + 1) % colors.size();
     }
 }
 
@@ -336,14 +357,13 @@ void GamePrintTile::print()
 #endif
 
 int ConsoleUi::showMultipleIntChoice(const std::string &message,
-                              const int minValue,
-                              const int maxValue) const
+                                     const int minValue,
+                                     const int maxValue) const
 {
     int result;
 
-    std::cout << message << std::endl;
+    std::cout << message << ": ";
 
-    std::cout << "Answer: ";
     std::cin >> result;
 
     while (std::cin.fail() || result > maxValue || result < minValue)
